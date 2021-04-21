@@ -1,0 +1,95 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{HomeWorkTemplate}
+\usepackage{circuitikz}
+\usepackage[shortlabels]{enumitem}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{listings}
+
+\def\Max{\text{بیشینه کن}}
+\def\Min{\text{کمینه کن}}
+\def\st{\text{\rl{که}}}
+
+\usetikzlibrary{shapes.multipart}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tcolorbox}
+\usepackage{xepersian}
+\settextfont{XB Niloofar}
+\usetikzlibrary{arrows,automata}
+\usetikzlibrary{circuits.logic.US}
+\usepackage{changepage}
+\newcounter{problemcounter}
+\newcounter{subproblemcounter}
+\setcounter{problemcounter}{1}
+\setcounter{subproblemcounter}{1}
+\newcommand{\problem}[1]
+{
+	\subsection*{
+		پرسش
+%		\arabic{problemcounter} 
+%		\stepcounter{problemcounter}
+%		\setcounter{subproblemcounter}{1}
+		#1
+	}
+}
+\newcommand{\subproblem}{
+	\textbf{\harfi{subproblemcounter})}\stepcounter{subproblemcounter}
+}
+
+
+\begin{document}
+\handout
+{بهینه‌سازی ترکیبیاتی مقدماتی}
+{مرتضی علیمی، هانی احمد زاده}
+{بهار 1400}
+{اطلاعیه}
+{سروش زارع}
+{97100405}
+ {تمرین تحویلی 5}
+\problem{1}
+در ابتدا فرض می‌کنیم که مواردی مانند دور با ظرفیت بی نهایت و مجموع هزینه‌های منفی وجود ندارد، زیرا در غیر این صورت مساله جواب بهینه ندارد.
+\lemma{می‌توانیم یک ماتریس $U$ با درایه‌های ثابت $u$ پیدا کنیم به طوری که افزودن قید $f \leq U$ جواب‌های مساله را عوض نکند.}
+\proof{}
+می‌توانیم با استفاده از الگوریتمی شبیه به باینری سرچ مقدار $u$ را پیدا کنیم. در ابتدا قرار می‌دهیم $U=1$ و جواب بهینه‌ی مساله را پیدا می‌کنیم، سپس در هر مرحله $u$ را دو برابر می‌کنیم، اگر جواب بهینه‌ی مساله عوض نشد، همین $u$ را به عنوان درایه‌های $U$
+در قید
+$f \leq U$ 
+درنظر می‌گیریم. ولی اگر جواب تغییر کرد، همین الگوریتم را ادامه می‌دهیم.
+\begin{latin}
+	$\square$
+\end{latin}
+پس تا کنون مساله‌ای به شکل زیر داریم:
+
+\begin{align*}
+\text{\Min} &\quad  c^T f\\
+\text{\st} &\quad  0 \leq f \leq U \\
+&\quad \nabla(f)_i = b_i \quad \forall i \in V
+\end{align*}
+
+حال سعی می‌کنیم هزینه‌ی منفی را از بین ببریم. برای این کار، در ابتدا به ازای هر یال $e=xy$ با $c_e$ منفی، مقادیر
+$b_x$
+و 
+$b_y$
+را به شکل زیر آپدیت می‌کنیم:
+\begin{align*}
+	b_x += u \\
+	b_y -= u \\
+\end{align*}
+خود یال $e$ را حذف می‌کنیم و یک یال $e'=yx$ را با هزینه‌ی
+$|c_e| = -c_e$
+و شار اولیه‌ی ۰ اضافه می‌کنیم.
+این آپدیت را به ازای تمام یال‌های با هزینه‌ی منفی انجام می‌دهیم تا در نهایت هیچ هزینه‌ی منفی باقی نمانده باشد.
+نحوه‌ی این مدل سازی به این گونه است که به ازای یک یال $e=xy$ با هزینه‌ی منفی، با عوض کردن $b_x$ و $b_u$ فرض مي‌کنیم که تمام ظرفیت این یال استفاده شده است، ولی این شانس را به الگوریتم می‌دهیم که بتواند از تمام این ظرفیت استفاده نکند (با قرار دادن یال برعکس $e'$ از $y$ به $x$ با هزینه‌ی مثبت). در واقع تمام هزینه‌های منفی را در ابتدا لحاظ می‌کنیم و صرفا در صورت نیاز برخی از آن ها را بعدا کنسل می‌کنیم.
+در نهایت اگر مقدار $b$ آپدیت شده را با $b'$ نشان دهیم و هزینه‌ها را با $c'$ نشان دهیم، کافیست مساله‌ی زیر را حل کنیم:
+\begin{align*}
+\text{\Min} &\quad  c'^T f\\
+\text{\st} &\quad  0 \leq f \leq U \\
+&\quad \nabla(f)_i = b_i' \quad \forall i \in V
+\end{align*}
+اگر جواب بهینه‌ی این مساله را با $f^*$ نشان دهیم، برای به دست آوردن جواب مساله‌ی اصلی، برای یال‌های $e$ که از همان ابتدا هزینه‌ی مثبت داشته‌اند کافیست همان $f^*_e$ را برای $f_e$ در نظر بگیریم و برای یال‌های $e$ که در ابتدا هزینه‌ی منفی داشته‌اند،  کافیست $f_e$ را برابر با 
+$u - {f_e'}^*$
+ قرار دهیم (چون در ابتدا فرض کردیم تمام ظرفیت  $e$ استفاده شده است ولی در نهایت  به اندازه‌ی
+${f_e'}^*$
+از آن را کنسل کرده‌ایم).
+\end{document}

@@ -1,0 +1,54 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{HomeWorkTemplate}
+\usepackage{circuitikz}
+\usepackage[shortlabels]{enumitem}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{listings}
+
+\usetikzlibrary{shapes.multipart}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tcolorbox}
+\usepackage{xepersian}
+\settextfont{XB Niloofar}
+\usetikzlibrary{arrows,automata}
+\usetikzlibrary{circuits.logic.US}
+\usepackage{changepage}
+\newcounter{problemcounter}
+\newcounter{subproblemcounter}
+\setcounter{problemcounter}{1}
+\setcounter{subproblemcounter}{1}
+\newcommand{\problem}[1]
+{
+	\subsection*{
+		پرسش
+%		\arabic{problemcounter} 
+%		\stepcounter{problemcounter}
+%		\setcounter{subproblemcounter}{1}
+		#1
+	}
+}
+\newcommand{\subproblem}{
+	\textbf{\harfi{subproblemcounter})}\stepcounter{subproblemcounter}
+}
+
+
+\begin{document}
+\handout
+{بهینه‌سازی ترکیبیاتی مقدماتی}
+{مرتضی علیمی، هانی احمد زاده}
+{بهار 1400}
+{اطلاعیه}
+{سروش زارع}
+{97100405}
+ {تمرین تحویلی 2}
+\problem{4}
+اگر قید پوشش یالی بودن را به نوعی عوض کنیم که به جای برداشتن یا برنداشتن یک یال، بتوانیم یک ضریب (بین صفر و یک) از یال را برداریم، و به طور مشابه در مساله‌ی دوم قید $Z_+$ را با نامنفی بودن جایگزین کنیم، دو مساله‌ی گفته شده دقیقا دوگان همدیگر هستند و بنابراین طبق قضیه‌ی دوگانی قوی، جواب این دو مساله با هم برابرند. حال نشان می‌دهیم عوض کردن قیود بیان شده، مقدار جواب‌های بهینه دو مساله را تغییر نمی‌دهد.
+نکته‌ی اصلی این است که $G$ گرافی دو بخشی است، و ماتریس $A$ و $A^T$ ظاهر شده در مساله‌ی اصلی و مساله‌ی دوگان، دقیقا همان ماتریس وقوع و ترانهاده‌ی آن هستند (البته به طور دقیق‌تر، یک سطر یا یک ستون $-I$ نیز به ماتریس وقوع اضافه شده است) که می‌دانیم ماتریس وقوع برای گراف‌های دو بخشی $TU$ است (و افزایش یک سطر یا ستون $-I$ باز هم $TU$ بودن را حفظ می‌کند)، درنتیجه تمام راس‌های  چندوجهی متناظر با این دو مساله، صحیح می‌باشند و درنتیجه هر دو مساله دارای جواب بهینه‌ی صحیح می‌باشند. بنابراین مقدار بهینه در حالت آرام‌سازی‌ شده‌ی این دو مساله فرقی با حالت گسسته (صحیح) ندارد می‌توانیم همین قید‌های آرام سازی شده را درنظر بگیریم. درنتیجه جواب دو مساله با هم برابر است (طبق دوگانی قوی) و هر دو جواب بهینه‌ی صحیح دارند (به دلیل TU بودن). که همان حکم صورت سوال است.
+\begin{latin}
+	$\square$
+\end{latin}
+
+\end{document}

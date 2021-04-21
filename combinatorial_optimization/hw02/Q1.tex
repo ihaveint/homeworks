@@ -1,0 +1,154 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{HomeWorkTemplate}
+\usepackage{circuitikz}
+\usepackage[shortlabels]{enumitem}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{listings}
+
+\def\Max{\text{بیشینه کن}}
+\def\Min{\text{کمینه کن}}
+\def\st{\text{\rl{که}}}
+
+\usetikzlibrary{shapes.multipart}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tcolorbox}
+\usepackage{xepersian}
+\settextfont{XB Niloofar}
+\usetikzlibrary{arrows,automata}
+\usetikzlibrary{circuits.logic.US}
+\usepackage{changepage}
+\newcounter{problemcounter}
+\newcounter{subproblemcounter}
+\setcounter{problemcounter}{1}
+\setcounter{subproblemcounter}{1}
+\newcommand{\problem}[1]
+{
+	\subsection*{
+		پرسش
+%		\arabic{problemcounter} 
+%		\stepcounter{problemcounter}
+%		\setcounter{subproblemcounter}{1}
+		#1
+	}
+}
+\newcommand{\subproblem}{
+	\textbf{\harfi{subproblemcounter})}\stepcounter{subproblemcounter}
+}
+
+
+\begin{document}
+\handout
+{بهینه‌سازی ترکیبیاتی مقدماتی}
+{مرتضی علیمی، هانی احمد زاده}
+{بهار 1400}
+{اطلاعیه}
+{سروش زارع}
+{97100405}
+ {تمرین تحویلی 2}
+\problem{1}
+\subproblem
+ اگر $\chi^R$ بردار مشخصه‌ی $R$ باشد، داریم:
+\begin{align*}
+	|R \cap \{\sigma_i(2t-1), \sigma_i(2t) \} | = \chi^R_{\sigma_i(2t-1)} + \chi^R_{\sigma_i(2t)} = 1
+\end{align*}
+بنابراین همین قید‌ها را می‌توانی برای $x$ های شدنی لحاظ کنیم و به چندوجهی زیر برسیم:
+\begin{align*}
+\quad  Ax &\leq 1\\
+\quad  -Ax &\leq -1\\
+\quad 0 &\leq x_i \leq 1 \quad \forall i \in [n]
+\end{align*}
+که ماتریس $A$ اینگونه تعریف می‌شود که $n/2$ سطر اول آن متناظر با $n/2$ قید به شکل زیر
+\begin{align*}
+	x_{\sigma_1(2t - 1)} + x_{\sigma_1(2t)} \ \ \forall t \in [n/2]
+\end{align*}
+و $n/2$ سطر بعدی متناظر با قید‌های
+\begin{align*}
+	x_{\sigma_2(2t - 1)} + x_{\sigma_2(2t)} \ \ \forall t \in [n/2]
+\end{align*}
+می‌باشند، یعنی در هر کدام از این سطر‌ها دو درایه  $2t-1$ و $2t$ برابر با ۱ هستند و بقیه‌ی درایه‌ها ۰ هستند.
+اگر چندوجهی حاصل از این قیود را با $Q$ نشان دهیم، ادعا می‌کنیم 
+$Q = P_R$
+\proof{}
+ابتدا نشان می‌دهیم هر راس  $v$ از $P_R$ عضو $Q$ است. این مورد تقریبا واضح است، زیرا رئوس $P_R$ را دقیقا بردار مشخصه‌هایی درنظر گرفتیم که شروط گفته شده مربوط به زیرمجموعه‌ی خوب برایشان برقرار بود، که عملا معادل با همان قیودی است که در چندوجهی $Q$ آورده‌ایم. بنابراین  $v \in Q$.
+از آنجایی که تمام رئوس $P_R$ عضو $Q$ هستند و $Q$ و $P_R$ هر دو مجموعه‌ی محدب هستند، $P_R \subseteq Q$.
+\newline
+حال نشان می‌دهیم که تمام رئوس $Q$ نیز داخل $P_R$ هستند. برای این مورد  نشان می‌دهیم هر راس $Q$ صحیح است و درنتیجه  هر راس از $Q$ دقیقا متناظر با یکی از راس‌های $P_R$ است. دلیل این اتفاق این است که اگر به قید‌های $Q$ نگاه کنیم، می‌بینیم که $n/2$ سطر اول آن، دقیقا مانند ماتریس وقوع در یک گراف دو بخشی می‌باشند و $n/2$ سطر دوم آن نیز ماتریس وقوع در یک گراف دو بخشی دیگر می‌باشند، و هدف پیدا کردن یک تطابق است. بنابراین در عمل انگار یک گراف دو بخشی داریم و سعی می‌کنیم که یک تطابق از آن را پیدا کنیم. از آنجایی که ماتریس  وقوع گراف‌های دو بخشی $TU$ است، تمام راس‌های $Q$ صحیح می‌باشند و درنتیجه هر راس از $Q$ داخل $P_R$ است. به دلیل محدب بودن $Q$ و $P_R$، نتیجه می‌گیریم که
+$Q \subseteq P_R$.
+از دو گزاره‌ی اثبات شده نتیجه می‌شود که
+$Q = P_R$
+که همان حکم سوال است.
+%\newline
+\begin{latin}
+	$\square$
+\end{latin}
+\subproblem
+در قسمت (الف) دیدیم که نمایش چند وجهی گفته شده به صورت نامساوی‌ها به صورت 
+$Ax \leq b$
+قابل بیان است که $A$ ماتریسی $TU$ است. از طرفی با قرار دادن بردار $x$ به طوری که همه‌ی $x_i$ ها برابر با $1/2$ باشند، به وضوح می‌بینیم که شرط بخش (الف) برقرار است و درنتیجه چند وجهی زیرمجموعه‌های خوب ناتهی است. از طرفی به خاطر $TU$ بودن ماتریس  $A$، تمام راس‌های این چند وجهی صحیح هستند و درنتیجه حداقل یک جواب بهینه‌ی صحیح دارد. اگر زیرمجموعه‌ی $R$ متناظر با این جواب بهینه را با $R^*$ نشان دهیم، ادعا می‌کنیم که $R^*$ یک رنگ آمیزی با اختلاف ۲ به ما می‌دهد.
+
+برهان:
+کافی است اثبات کنیم به ازای هر
+$i = 1 , 2$
+و هر
+$l, u \in [n]$
+که
+$l < u$
+شروط گفته شده در ابتدای سوال برقرارند.
+کافی است اثبات کنیم به ازای $i \in \{0,1\}$ دلخواه و دو مقدار
+$l , u \in [n]$
+دلخواه که
+$l < u$
+این شروط برقرارند.
+داریم:
+$I := \{\sigma_i(l), \sigma_i(l+1), ..., \sigma_i(u) \}$
+حال سعی می‌کنیم همین $I$ را بازنویسی کنیم. ابتدا تعریف می‌کنیم:
+\begin{align*}
+\forall t \in [n/2] : D(i, t) := \{\sigma_i(2t-1), \sigma_i(2t) \}	
+\end{align*}
+حال داریم:
+\begin{align}
+	I = [\bigcup_{j=\lceil (l+1)/2 \rceil}^{\lfloor r/2 \rfloor} D(i,j)] \cup L \cup U
+\end{align}
+به طوری که داریم:
+\begin{align*}
+	L =
+\left\{
+	\begin{array}{ll}
+		\{\sigma_i (l)\}  & \mbox{if } l \ mod \ 2 = 0\\
+		\phi & \mbox{else }
+	\end{array}
+\right. \\ \\
+	U =
+\left\{
+	\begin{array}{ll}
+		\{\sigma_i (u)\}  & \mbox{if } u \ mod \ 2 = 1\\
+		\phi & \mbox{else }
+	\end{array}
+\right.
+\end{align*}
+
+در واقع بازه‌ی $I$ را به تعدادی بازه‌ به شکل
+$\{\sigma_i(2t-1), \sigma_i(2t) \}$
+(و در صورت نیاز برای ابتدا و انتهای $I$، دو مجموعه‌ی تک عضوی $L$ و $U$) افراز کرده‌ایم. حال  با درنظر گرفتن $R^*$ می‌بینیم که به ازای هر کدام از این مجموعه‌های ۲ عضوی که بخشی از $I$ را ساخته‌اند، 
+$|R \cap \{\sigma_i(2t-1), \sigma_i(2t) \}| = 1$
+برقرار است و همچنین به طور مشابه داریم:
+\begin{align*}
+|\{\sigma_i(2t-1), \sigma_i(2t) \} \backslash R| = 1	
+\end{align*}
+
+و درنتیجه داریم:
+\begin{align*}
+	||\{\sigma_i(2t-1), \sigma_i(2t) \} \cap R| - |\{\sigma_i(2t-1), \sigma_i(2t) \} \backslash R|| = 0
+\end{align*}
+با جمع زدن این تساوی روی تمام زیرمجموعه‌های ۲ تایی در (۱)، می‌بینیم که بدون درنظر گرفتن $L$ و $U$، این تساوی همچنان صفر باقی می‌ماند. در نهایت با اضافه کردن $L$ و $U$ می‌بینیم که ممکن است دیگر تساوی برقرار نباشد ولی از آنجایی که هر کدام از $L$ و $U$ یک عضو دارند، حداکثر به اندازه‌ی ۲ یا منفی ۲ از صفر فاصله می‌گیریم، پس همواره شرط
+\begin{align*}
+	||I \cap R^*| - |I \backslash R^*|| \leq 2
+\end{align*}
+برقرار است. در نتیجه $R^*$ متناظر با یک رنگ‌آمیزی با اختلاف ۲ است و حکم این قسمت اثبات می‌شود.
+\begin{latin}
+	$\square$
+\end{latin}
+\end{document}

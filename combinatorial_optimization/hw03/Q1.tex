@@ -1,0 +1,112 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{HomeWorkTemplate}
+\usepackage{circuitikz}
+\usepackage[shortlabels]{enumitem}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{listings}
+
+\def\Max{\text{بیشینه کن}}
+\def\Min{\text{کمینه کن}}
+\def\st{\text{\rl{که}}}
+
+\usetikzlibrary{shapes.multipart}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tcolorbox}
+\usepackage{xepersian}
+\settextfont{XB Niloofar}
+\usetikzlibrary{arrows,automata}
+\usetikzlibrary{circuits.logic.US}
+\usepackage{changepage}
+\newcounter{problemcounter}
+\newcounter{subproblemcounter}
+\setcounter{problemcounter}{1}
+\setcounter{subproblemcounter}{1}
+\newcommand{\problem}[1]
+{
+	\subsection*{
+		پرسش
+%		\arabic{problemcounter} 
+%		\stepcounter{problemcounter}
+%		\setcounter{subproblemcounter}{1}
+		#1
+	}
+}
+\newcommand{\subproblem}{
+	\textbf{\harfi{subproblemcounter})}\stepcounter{subproblemcounter}
+}
+
+
+\begin{document}
+\handout
+{بهینه‌سازی ترکیبیاتی مقدماتی}
+{مرتضی علیمی، هانی احمد زاده}
+{بهار 1400}
+{اطلاعیه}
+{سروش زارع}
+{97100405}
+ {تمرین تحویلی 3}
+\problem{1}
+\lemma{ اگر به ازای یک $x \in P$ و $T,T' \subseteq S$ داشته باشیم 
+\begin{align*}
+	x(T) = r(T) \\
+	x(T') = r(T')
+\end{align*}
+خواهیم داشت:
+\begin{align*}
+	x(T \cap T') = r(T \cap T') \\
+	x(T \cup T') = r(T \cup T')
+\end{align*}
+}
+\proof{
+داریم:
+\begin{align*}
+	x(T\cap T') + x(T \cup T') \leq r(T \cap T') + r(T \cup T') \leq r(T) + r(T') = x(T) + x(T')
+\end{align*}
+نامساوی اول به دلیل قیود $P$ است، نامساوی دوم به دلیل فرض (ب) در صورت سوال است و تساوی آخر به دلیل فرض لم است. 
+حال توجه کنید که طرف راست و چپ این عبارت با هم برابرند. بنابراین تمام نامساوی ها به صورت تساوی برقرارند و به طور دقیق تر داریم:
+\begin{align*}
+	x(T \cap T') = r(T \cap T') \\
+	x(T \cup T') = r(T \cup T')
+\end{align*}
+که همان لم خواسته شده است.
+\begin{latin}
+	$\square$
+\end{latin}
+حال نقطه‌ی گوشه‌ای $x$ با شروط
+\begin{align*}
+	x_e >0, \forall e \in S
+\end{align*}
+درنظر می‌گیریم. با توجه به اینکه $x$ گوشه‌ای است، باید در $|S|$ قید مستقل خطی به شکل
+$x(T) = r(T)$
+صدق کند. برای هر کدوم از این قیود $\chi^T$ را درنظر می‌گیریم و مجموعه‌ی این $\chi^T$ ها را به صورت سطر به سطر در یک ماتریس $A$ قرار می‌دهیم. همچنین این سطر‌ها را مرتب می‌کنیم به طوری که تعداد ۱ ها در سطر‌ها از بالا به پایین نزولی باشد.
+ماتریس $A$ ماتریسی $|S| * |S|$ است. با توجه به اینکه سطر‌ها را مستقل خطی درنظر گرفتیم، رنک سطری برابر با $|S|$ است و درنتیجه رنک ستونی نیز $|S|$ است. حال سطر اول را درنظر بگیرید، اگر در تمام درایه‌های $i$ که این سطر برابر با ۱ است، سطر دوم نیز برابر با ۱ باشد، با توجه به اینکه سطر‌ها را به ترتیب نزولی چیده‌ایم، سطر اول و دوم دقیقا برابرند و مستقل خطی نمی‌باشند که تناقص است. پس سطر دوم حداقل در یکی از درایه‌هایی که سطر اول مقدار ۱ دارد، مقدار ۰ دارد. به طور مشابه سطر سوم حداقل در یکی از درایه‌هایی که سطر دوم برابر با ۱ است، مقدار ۰ دارد وهمین استدلال را تا انتها می‌توانیم ادامه دهیم.
+پس می‌توانیم با اشتراک گیری، به بردار‌هایی به شکل زیر برسیم:
+\begin{align}
+\begin{pmatrix} 1 \\ 0 \\ \vdots \\ 0 \\ 0 \end{pmatrix}	
+,
+\begin{pmatrix} ? \\ 1 \\ 0 \\ \vdots \\ 0 \end{pmatrix}	
+, ... ,
+\begin{pmatrix} ? \\ ? \\ \vdots \\ ? \\ 1 \end{pmatrix}	
+\end{align}
+که مقادیر علامت سوال می‌توانند هر کدام از مقدار‌های ۰ و ۱ باشند. نکته‌ی کلیدی این است که این بردارها از اشتراک گیری تعدادی بردار که متناظر با قیودی به شکل $x(T) = r(T)$ می‌باشند به دست آمده‌اند و درنتیجه طبق لم (۱)، هر کدام از بردار‌های $v$ در بالا، در شرط
+$x(v) = r(v)$
+صدق می‌کند. همچنین اگر از اجتماع گیری نیز استفاده کنیم (هر بردار را با بردارهای قبل خود اجتماع بگیریم، به بردار‌های زیر می‌رسیم:
+\begin{align}
+\begin{pmatrix} 1 \\ 0 \\ \vdots \\ 0 \\ 0 \end{pmatrix}	
+,
+\begin{pmatrix} 1 \\ 1 \\ 0 \\ \vdots \\ 0 \end{pmatrix}	
+, ... ,
+\begin{pmatrix} 1 \\ 1 \\ \vdots \\ 1 \\ 1 \end{pmatrix}	
+\end{align}
+این بردار‌ها به وضوح مستقل خطی هستند و همچنین مجددا طبق لم (۱) نتیجه می‌گیریم که به ازای هر بردار $v$ از بین این بردار‌ها، داریم
+$x(v) = r(v)$.
+بنابراین شرط (ب) خواسته شده در حکم سوال برقرار است. 
+همچنین این بردارها به وضوح تشکیل یک زنجیر می‌دهند که تعداد اعضای آن $|S|$ است و درنتیجه شرط (ج) نیز برقرار است. شرط (آ) نیز به خاطر برقراری لم (۱)  و نحوه‌ی ساختن بردار‌های  (2) برقرار است.
+پس تمامی شرط‌ها برقرار است و زنجیر مدنظر را ساختیم.
+\begin{latin}
+	$\square$
+\end{latin}
+\end{document}

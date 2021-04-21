@@ -1,0 +1,115 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{HomeWorkTemplate}
+\def\Max{\text{بیشینه کن}}
+\def\Min{\text{کمینه کن}}
+\def\st{\text{\rl{که}}}
+
+\usepackage{circuitikz}
+\usepackage[shortlabels]{enumitem}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{listings}
+
+\usetikzlibrary{shapes.multipart}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tcolorbox}
+\usepackage{xepersian}
+\settextfont{XB Niloofar}
+\usetikzlibrary{arrows,automata}
+\usetikzlibrary{circuits.logic.US}
+\usepackage{changepage}
+\newcounter{problemcounter}
+\newcounter{subproblemcounter}
+\setcounter{problemcounter}{1}
+\setcounter{subproblemcounter}{1}
+\newcommand{\problem}[1]
+{
+	\subsection*{
+		پرسش
+%		\arabic{problemcounter} 
+%		\stepcounter{problemcounter}
+%		\setcounter{subproblemcounter}{1}
+		#1
+	}
+}
+\newcommand{\subproblem}{
+	\textbf{\harfi{subproblemcounter})}\stepcounter{subproblemcounter}
+}
+
+
+\begin{document}
+\handout
+{بهینه‌سازی ترکیبیاتی مقدماتی}
+{مرتضی علیمی، هانی احمد زاده}
+{بهار 1400}
+{اطلاعیه}
+{سروش زارع}
+{97100405}
+ {تمرین تحویلی 3}
+ تعریف می‌کنیم
+\begin{align*}
+P' := CH(\{\chi^F | F \in \mathcal{F} \}
+\end{align*}
+
+\paragraph{ابتدا نشان می‌دهیم که $P' \subseteq P$.}
+اثبات این مورد واضح است، با توجه به محدب بودن $P$ و $P'$ کافی است نشان دهیم تمام راس‌های $P'$ در $P$ قرار دارند. از طرفی به ازای هر 
+$\chi^F | F \in \mathcal{F}$
+ به وضوح تمام شروط 
+\begin{align*}
+	\sum_{I \in \mathcal{I} : e \in I} x(I) \geq 1, \forall e \in E
+\end{align*}
+برقرار است (با توجه به تعریف $\mathcal{F}$). پس تمام رئوس $P'$ در $P$ قرار دارند و درنتیجه
+\begin{align}
+	P' \subseteq P
+\end{align}
+\paragraph{حال نشان می‌دهیم که $P \subseteq P'$.}
+برای این کار نیز نشان می‌دهیم که ماتریس توصیف کننده‌ی قیود $P$ تماما تک پیمانه‌ای است و درنتیجه تمام رئوس $P$ صحیح هستند و با توجه به اینکه فقط مقادیر 0 و 1 برای درایه‌های صحیح مجاز است (طبق تعریف $P$)، تمام رئوس $P$ در $P'$ قرار خواهند داشت.
+ماتریس $A$ متناظر با قیود به شکل
+\begin{align*}
+	\sum_{I \in \mathcal{I} : e \in I} x(I) \geq 1, \forall e \in E
+\end{align*}
+را درنظر بگیرید.
+اگر سطر‌های این ماتریس را متناظر با یال‌های 
+$e \in E$
+درنظر بگیریم و ستون‌ها را متناظر با
+$I \in \mathcal{I} $
+هر ستون متناظر یک زیرمسیر از مسیری مانند $P(v)$ است (طبق صورت سوال). این ماتریس را با $A$ نشان می‌دهیم. اثبات می‌کنیم که $A^T$ تماما تک پیمانه‌ای است و درنتیجه $A$ نیز تماما تک پیمانه‌ای است. 
+\newline
+ستون‌های $A^T$ معادل با یال‌های $e \in E$ هستند. کافی است طبق قضیه‌ی
+$Ghouila-Houri$
+نشان دهیم که برای هر زیرمجموعه از این ستون‌ها، یک رنگ آمیزی دو متساوی وجود دارد. این کار نیز به راحتی انجام می‌شود، کافی است برای هر زیرمجموعه‌ی 
+$E' \subseteq E$
+بردار مشخصه‌ی
+$\chi^{E'}$
+را درنظر بگیریم و به هر یال $e \in E$ وزن
+$\chi^{E'}_{e}$
+را نسبت دهیم. در واقع وزن هر یال ۱ است اگر و تنها اگر در $E'$ آمده باشد و درغیر اینصورت ۰ است.  این وزن را با $w(e)$ نشان می‌دهیم. همچنین به ازای هر یال $e$ مقدار $d(e)$ را به صورت بازگشتی تعریف می‌کنیم:
+\begin{itemize}
+	\item اگر $e=uv$ که $u$ ریشه‌ی درخت است، $d(e):=w(e)$
+	\item اگر $e=uv$ که $u$ پدر $v$ است به طوری که پدر $u$ برابر با $u'$ است، تعریف می‌کنیم:
+	\begin{align*}
+		d(e) = w(e) + d(u'u)
+	\end{align*}
+\end{itemize}
+در واقع $d(e)$ نشان دهنده‌ی جمع وزن‌ یال‌هایی است که از ریشه شروع شده‌اند و درنهایت با طی یک سری یال به $e$ رسیده‌اند  (خود $e$ را نیز درنظر می‌گیریم).
+حال به ازای هر 
+$e \in E | w(e) = 1$
+بسته به اینکه
+$d(e)$
+زوج است یا فرد، رنگ ستون متناظر با $e$ در $E'$ را آبی و قرمز می‌کنیم. به راحتی می‌توان دید که با توجه به تعریف $d(e)$، به ازای هر سطر $A^T$  که متناظر با یکی از $I \in \mathcal{I}$ ها است، درایه‌ی مربوط به این سطر در اختلاف ستون‌های آبی و قرمز برابر با یکی از اعداد منفی ۱ و صفر و مثبت ۱ است (دلیل این اتفاق نیز این است که $I$ متناظر با یک زیر مسیر از یک $P(v)$ است و بنابراین با درنظر گرفتن ستون‌های $E'$ و رنگ آمیزی بیان شده، یال‌های $I$ (به جز یال‌هایی که وزن ۱ دارند که عملا از ستون‌ها حذف شده‌اند) یک در میان آبی و قرمز شده‌اند که نتیجه‌ی مدنظر را می‌دهد). بنابراین به ازای تمام سطر‌های $A^T$ این خاصیت برقرار است و رنگ آمیزی بیان شده یک رنگ آمیزی دو متساوی است. 
+درنتیجه $A^T$ ماتریسی $TU$ است و به دنبال آن $A$ نیز $TU$ است.
+پس تمام رئوس $P$ صحیح می‌باشند و درنتیجه داخل $P'$ خواهند بود و داریم:
+\begin{align}
+	P \subseteq P'
+\end{align}
+با توجه به نتایج (۱) و (۲) داریم
+\begin{align*}
+	P = P' = CH(\{\chi^F | F \in \mathcal{F} \}
+\end{align*}
+که همان حکم سوال است.
+\begin{latin}
+	$\square$
+\end{latin}
+\end{document}

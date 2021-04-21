@@ -1,0 +1,102 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{HomeWorkTemplate}
+\usepackage{circuitikz}
+\usepackage[shortlabels]{enumitem}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{listings}
+
+\usetikzlibrary{shapes.multipart}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tcolorbox}
+\usepackage{xepersian}
+\settextfont{XB Niloofar}
+\usetikzlibrary{arrows,automata}
+\usetikzlibrary{circuits.logic.US}
+\usepackage{changepage}
+\newcounter{problemcounter}
+\newcounter{subproblemcounter}
+\setcounter{problemcounter}{1}
+\setcounter{subproblemcounter}{1}
+\newcommand{\problem}[1]
+{
+	\subsection*{
+		پرسش
+%		\arabic{problemcounter} 
+%		\stepcounter{problemcounter}
+%		\setcounter{subproblemcounter}{1}
+		#1
+	}
+}
+\newcommand{\subproblem}{
+	\textbf{\harfi{subproblemcounter})}\stepcounter{subproblemcounter}
+}
+
+
+\begin{document}
+\handout
+{بهینه‌سازی ترکیبیاتی مقدماتی}
+{مرتضی علیمی، هانی احمد زاده}
+{نیم‌سال اول 1399\lr{-}1400}
+{اطلاعیه}
+{سروش زارع}
+{97100405}
+ {تمرین تحویلی 1}
+\problem{2}
+\subproblem
+قضیه رادون!
+(صورت قضیه برای یادآوری در زیر آورده شده است)
+\theorem{فرض کنید $S \in \mathbb{R}^d$. اگر $d+2$ نقطه‌ی دلخواه داخل $S$ بگیریم و این نقاط را $A$ بنامیم، می‌توان $A$ را به دو دسته افراز کرد که پوش محدب این دو دسته اشتراک داشته باشد. \\}
+در واقع قضیه‌ی رادون، حالت خاص قسمت (الف) برای $r=2$ است.
+\newline
+\newline
+\subproblem
+حالت (الف) را به حالت مخروطی در (ب) کاهش می‌دهیم و بنابراین درستی حالت الف اثبات می‌شود.
+مجموعه‌ی $A$ را همان مجموعه‌ی داخل مساله‌ی (الف) درنظر بگیرید. با توجه به اینکه این نقاط در $\mathbb{R}^d$ قرار دارند، می‌توانیم یک بعد دیگر اضافه کنیم و قرار دهیم:
+\begin{align*}
+	B_i := (x_i, 1) \forall x_i \in A
+\end{align*}
+در واقع یک اسکالر ۱ را به عنوان آخرین عضو به $x_i$ اضافه می‌کنیم تا $B_i$ حاصل شود.
+\lemma{\lr{CH(B)} شامل مبدا نیست.}
+\proof{}
+اثبات به راحتی با تعریف ترکیب محدب حاصل می‌شود، داریم:
+\begin{align*}
+	CH(B) = \{x | x = \sum_{x_i \in B}\lambda_i x_i , \sum_i \lambda_i = 1, 0 \leq \lambda_i \leq 1  \}
+\end{align*}
+حال اگر توجهمان را متمرکز به آخرین اندیس $x_i$ ها  کنیم، می‌بینیم که هر ترکیب محدب از عنصر‌های $B$، آخرین اندیسشان دقیقا ۱ خواهد بود. به طور دقیق تر داریم:
+\begin{align*}
+	y \in CH(B) &\rightarrow y = \sum_{x_i \in B}\lambda_i x_i , \sum_i \lambda_i = 1, 0 \leq \lambda_i \leq 1 \\
+	&\rightarrow y_{d + 1} = \sum_{x_i \in B}\lambda_i {(x_i)}_{d + 1} = \sum_{x_i \in B}\lambda_i = 1 \\
+	&\rightarrow y \neq 0 
+\end{align*}
+که همان شرط لازم برای برقراری مساله‌ی (ب) به ازای بردار‌های 
+$x \in B$
+است.
+بنابراین چون قسمت (ب) را به عنوان فرض قبول کردیم، می‌توانیم $B$ را به زیرمجموعه‌های
+$B_1, ... B_r$
+تقسیم کنیم به طوری که
+$\bigcap_i^r cone(B_i) \neq \{0\}$.
+یکی از اعضای این اشتراک را با $D$ نشان دهید.  با توجه به نحوه‌ی تعریف $B$ و همچنین تعریف تابع cone ، $(d+1)$امین اندیس $D$ اکیدا بیشتر از ۰ است. همچنین طبق تعریف cone می‌توانیم ببینیم که هر ضریب 
+$\lambda D : \lambda \geq 0$
+ نیز عضو این اشتراک خواهد بود. یکی از این ضریب‌ها مانند $D'$ را درنظر می‌گیریم که $(d+1)$امین اندیس‌ آن دقیقا برابر با ۱ باشد (با قرار دادن 
+$\lambda = \frac{1}{D_{d + 1}}$
+این کار ممکن است). بنابراین داریم:
+\begin{align*}
+	&\forall 1 \leq i \leq r \  \exists \lambda_1 \geq 0, ... ,\lambda_{|B_i|} \geq 0 : D' = \sum_j^{|B_i|} \lambda_j {(B_i)}_{j} , D'_{d + 1} = 1 \\ 
+	&\rightarrow \sum_j^{|B_i|}\lambda_j = 1 \rightarrow D' \in \bigcap_i^r CH(B_i)
+\end{align*}
+که منظور از 
+${(B_i)}_{j}$
+همان
+$j$امین عنصر از مجموعه‌ی 
+$B_i$
+است و منظور از $D'_{d+1}$ درایه‌ی $d+1$ از $D'$ است.
+
+حال اگر درایه‌ی آخر $D'$ یعنی $D'_{d+1}$ را حذف کنیم، و مجددا درایه‌ $d+1$ از $B_i$ ها را حذف کرده تا دوباره به $A_i$ برسیم، به یک $x \in \mathbb{R}^d$ می‌رسیم که در $\bigcap_i^r A_i$ وجود دارد که همان حکم قسمت (الف) است.
+\begin{latin}
+	$\square$
+\end{latin}
+
+\end{document}t

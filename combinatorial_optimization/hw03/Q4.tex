@@ -1,0 +1,145 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{HomeWorkTemplate}
+\usepackage{circuitikz}
+\usepackage[shortlabels]{enumitem}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{listings}
+
+\def\Max{\text{بیشینه کن}}
+\def\Min{\text{کمینه کن}}
+\def\st{\text{\rl{که}}}
+
+
+\usetikzlibrary{shapes.multipart}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tcolorbox}
+\usepackage{xepersian}
+\settextfont{XB Niloofar}
+\usetikzlibrary{arrows,automata}
+\usetikzlibrary{circuits.logic.US}
+\usepackage{changepage}
+\newcounter{problemcounter}
+\newcounter{subproblemcounter}
+\setcounter{problemcounter}{1}
+\setcounter{subproblemcounter}{1}
+\newcommand{\problem}[1]
+{
+	\subsection*{
+		پرسش
+%		\arabic{problemcounter} 
+%		\stepcounter{problemcounter}
+%		\setcounter{subproblemcounter}{1}
+		#1
+	}
+}
+\newcommand{\subproblem}{
+	\textbf{\harfi{subproblemcounter})}\stepcounter{subproblemcounter}
+}
+
+
+\begin{document}
+\handout
+{بهینه‌سازی ترکیبیاتی مقدماتی}
+{مرتضی علیمی، هانی احمد زاده}
+{بهار 1400}
+{اطلاعیه}
+{سروش زارع}
+{97100405}
+ {تمرین تحویلی 3}
+\problem{4}
+سیستم $Q_1$ را به صورت زیردرنظر می‌گیریم:
+\begin{align*}
+	A_1x \leq b_1 \\
+	A_2x \leq b_2
+\end{align*}
+به طور مشابه سیستم $Q_2$ را به صورت زیردرنظر می‌گیریم:
+\begin{align*}
+	A_1'x \leq b_1' \\
+	A_2'x \leq b_2
+\end{align*}
+باید اثبات کنیم که دستگاه $Q_2$ تمام دوگان صحیح است. بنابراین به ازای یک $c$ که $Q_2$ و دوگان آن جواب بهینه‌ دارند، باید اثبات کنیم که برنامه‌ی دوگان $Q_2$ یعنی 
+\begin{align*}
+\text{\Min} &\quad [b_1'^T \ \ b_2^T] y\\
+\text{\st} &\quad  [A_1'^T \ \ A_2^T]y = c\\
+&\quad y \geq 0
+\end{align*}
+که آن را با $D(Q_2)$ نشان می‌دهیم، جواب بهینه‌ی صحیح دارد.
+حال دستگاه زیر را درنظر بگیرید:
+\begin{align*}
+\text{\Min} &\quad [b_1^T \ \ b_2^T] y\\
+\text{\st} &\quad  [A_1^T \ \ A_2^T]y = c\\
+&\quad y \geq 0
+\end{align*}
+این دستگاه دوگان $Q_1$ است و آن را با $D(Q_1)$ نشان می‌دهیم. با توجه به تماما دوگان صحیح بودن $Q_1$، این دستگاه جواب بهینه‌ی صحیحی مانند
+\begin{align}
+y^* = \begin{pmatrix} y_1^* \\ y_2^* \end{pmatrix}	
+\end{align}
+\begin{latin}
+	$\square$
+\end{latin}
+دارد به طوری که
+\begin{align*}
+	b_2^Ty_2^* = m_2 \\
+	b_1^Ty_1^* = m_1 \\
+	A_2^Ty_2^* = c_2 \\
+	A_1^Ty_1^* = c_1
+\end{align*}
+که $c = c_1 + c_2$ و 
+مقدار
+$m := m_1 + m_2$
+همان مقدار بهینه‌ی دستگاه است.
+با توجه به  تساوی
+\begin{align}
+	\{x | A_1'x \leq b_1' \}	 = \{x | A_1x \leq b_1 \}	
+\end{align}
+فضای شدنی دوچند وجهی
+$Q_1$
+و $Q_2$
+برابرند و درنتیجه جواب بهینه‌ی آن‌ها نیز برابر است.
+حال نشان می‌دهیم بردار‌های صحیح
+$y_1, y_2 \geq 0$
+وجود دارند که 
+\begin{align}
+b_1'^Ty_1 + b_2^Ty_2 = m \\
+A_1'^Ty_1 + A_2^Ty_2 = c
+\end{align}
+
+طبیعتا می‌توانیم قرار دهیم
+$y_2 := y_2^*$
+و در ادامه سعی می‌کنیم مقدار مناسبی برای $y_1$ پیدا کنیم.
+\newline
+دستگاه زیر را درنظر بگیرید:
+\begin{align*}
+\text{\Min} &\quad b_1 y\\
+\text{\st} &\quad  A_1^T y_1 = c_1\\
+&\quad y_1 \geq 0
+\end{align*}
+مقدار جواب بهینه‌ی این دستگاه $m_1$ است (در غیر این‌صورت اگر این جواب بهینه توسط بردار $y''$ تولید شود، با قرار دادن $y''$ به جای $y_1^*$  و تغییر ندادن $y_2^*$ جواب بهتری از (۱)  خواهیم داشت که با بهینه بودن (۱) در تناقض است).  طبق قضیه‌ی دوگانی قوی، مقدار جواب بهینه‌ی دوگان این دستگاه نیز  $m_1$ است.
+دوگان این دستگاه را می‌نویسیم:
+\begin{align*}
+\text{\Max} &\quad c_1^T x\\
+\text{\st} &\quad  A_1x \leq b_1
+\end{align*}
+با توجه به تساوی (۲)، این دوگان را به شکل زیر می‌نویسیم
+\begin{align*}
+\text{\Max} &\quad c_1^T x\\
+\text{\st} &\quad  A_1'x \leq b_1'
+\end{align*}
+طبق فرض سوال، این دستگاه تماما دوگان صحیح است. پس اگر به ازای یک $c$ صحیح این دستگاه و دوگان آن جواب بهینه داشته باشند، دوگان آن جواب بهینه‌ی صحیح دارد.
+حال دوگان دستگاه بالا را می‌نویسیم:
+\begin{align*}
+\text{\Min} &\quad  y_1^T b_1'\\
+\text{\st} &\quad  A_1'^T y_1 = c_1 \\
+&\quad y_1 \geq 0
+\end{align*}
+با توجه به اینکه خود دستگاهمان مقدار جواب بهینه‌ی $m_1$ داشت، دوگان آن نیز طبق قضیه‌ی دوگانی قوی جواب بهینه‌ی $m_1$ دارد و با توجه به تماما دوگان صحیح بودن دستگاه اصلی، دوگان جواب بهینه‌ی صحیح دارد. از طرفی اگر این جواب بهینه‌ی صحیح را با $y''$ نشان دهیم، می‌توانیم قرار دهیم 
+$y_1 = y''$
+(از قبل قرارداده بودیم $y_2 = y_2^*$) به این ترتیب تساوی‌های (۳) و (۴) برقرار می‌شوند و $y_1$ و $y_2$ نیز بردار‌های صحیح نامنفی هستند. پس دستگاه $Q_2$ تماما دوگان صحیح است و حکم اثبات می‌شود.
+\begin{latin}
+	$\square$
+\end{latin}
+
+\end{document}

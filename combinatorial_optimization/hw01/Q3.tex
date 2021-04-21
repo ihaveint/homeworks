@@ -1,0 +1,118 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{HomeWorkTemplate}
+\usepackage{circuitikz}
+\usepackage[shortlabels]{enumitem}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{listings}
+
+\usetikzlibrary{shapes.multipart}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tcolorbox}
+\usepackage{xepersian}
+\settextfont{XB Niloofar}
+\usetikzlibrary{arrows,automata}
+\usetikzlibrary{circuits.logic.US}
+\usepackage{changepage}
+\newcounter{problemcounter}
+\newcounter{subproblemcounter}
+\setcounter{problemcounter}{1}
+\setcounter{subproblemcounter}{1}
+\newcommand{\problem}[1]
+{
+	\subsection*{
+		پرسش
+%		\arabic{problemcounter} 
+%		\stepcounter{problemcounter}
+%		\setcounter{subproblemcounter}{1}
+		#1
+	}
+}
+\newcommand{\subproblem}{
+	\textbf{\harfi{subproblemcounter})}\stepcounter{subproblemcounter}
+}
+
+
+\begin{document}
+\handout
+{بهینه‌سازی ترکیبیاتی مقدماتی}
+{مرتضی علیمی، هانی احمد زاده}
+{نیم‌سال اول 1399\lr{-}1400}
+{اطلاعیه}
+{سروش زارع}
+{97100405}
+ {تمرین تحویلی 1}
+\paragraph{\color{red}واضح است که مساله‌ی گفته شده در سوال یک چند وجهی است که در اینجا آن را با $Q$ نشان می‌دهیم.
+}
+\paragraph{\color{red} برای راحتی نوشتن، منظور از بردار‌هایی به شکل $(a_1, ... a_k)$ برداری ستونی با این درایه‌هاست و منظور بردار سطری نیست!}
+
+\problem{3}
+از آنجایی که چند وجهی $P$ کراندار فرض شده، می‌توانیم آن را به شکل یک چندراسی ($polotype$) درنظر بگیریم. رئوس این چندراسی را با
+$v_1, ... v_t$
+نشان دهید. در واقع داریم
+\begin{align*}
+CH(v_1, ... v_t) = P	
+\end{align*}
+همچنین تعریف می‌کنیم:
+\begin{align*}
+	V := (v_1, v_2, ... v_t)
+\end{align*}
+در واقع $V$ یک بردار ستونی شامل $v_i$ ها است.
+\newline
+با توجه به نحوه‌ی ساخت پوش محدب، می‌دانیم که هر نقطه‌ی داخل $P$ به صورت ترکیب محدب $v_i$ ها قابل نوشتن است. بنابراین داریم:
+\begin{align}
+	\forall x \in P \ \ \  \exists \ \ \  0 \leq \lambda_1 \leq 1, ..., 0 \leq \lambda_t \leq 1: \sum_i^t \lambda_iv_i = x	 \ \ , \ \ \sum_i^t \lambda_i = 1
+\end{align}
+می‌توانیم این ضرایب را به صورت یک تابع از 
+$\mathbb{R}^n$
+به
+$\mathbb{W}^t$
+درنظر بگیریم که ورودی آن یک نقطه‌ی
+$x \in P$
+است و خروجی آن ضرایب $\lambda_i$ مربوطه به صورت یک بردار ستونی است. این تابع را با $f$ نشان می‌دهیم. پس از این پس می‌توانیم به جای تمرکز روی نقاط $x \in P$، روی تصویر این نقاط تحت $f$ تمرکز کنیم و با داشتن هر کدام از این مقادیر در $\mathbb{W}^d$ می‌توانیم نقطه‌ی متناظر آن در $\mathbb{R}^n$ را به دست آوریم (طبق فرمول ۱). اگر هر کدام از این نقاط را با بردار $\lambda$ نشان دهیم و درایه‌های آن را با $\lambda_i$ نشان دهیم، تا کنون فقط قیود زیر را داشتیم:
+\begin{align*}
+	0 \leq \lambda_1 \leq 1, ..., 0 \leq \lambda_t \leq 1 \ \ , \ \ \sum_i^t \lambda_i = 1
+\end{align*}
+تا کنون قیود $x \in P$ را در این فضای جدید مدل کردیم، حال می‌خواهیم تعدادی قید دیگر اضافه کنیم که قیود $a_i^Tx = b_i$ را نیز داشته باشیم.
+
+به ازای هر شرط
+$a_j^Tx = b_j$
+در $Q$، می‌توانیم این شرط را با یک فرمول بندی جدید بنویسیم:
+\begin{align*}
+	A_j^Tx &= b_j \rightarrow A_j^T [f(x)^T V] = b_j \\ &\rightarrow \sum	_i^{t} (A_j^T v_i f(x)_i) = b_j 
+\end{align*}
+با توجه به اینکه
+$A_j^T v_i$
+یک اسکالر است، می‌توانیم یک ماتریس $p$ تعریف کنیم به طوری که
+\begin{align*}
+	p_{i,j} = A_j^T v_i
+\end{align*}
+و قیوداضافه شده را به صورت
+$ P \lambda = b$
+نشان دهیم.
+حال با اضافه کردن دادن یک سطر  تمام ۱ به $P$، قید
+$\sum_i^t \lambda_i = 1$
+را نیز در همین ماتریس $P$ لحاظ می‌کنیم و به طور مشابه درایه‌ی ۱ را به بردار $b$ اضافه کنیم.
+پس می‌توانیم یک مساله‌ی برنامه ریزی خطی بنویسیم که قیود آن شامل
+$P\lambda = (b,1)$
+و 
+$\lambda \geq 0$
+است.
+قبل از نوشتن تابع هدف، توجه کنید که این برنامه ریزی خطی به نوعی در تناظر با $Q$ آمده در مساله است، زیرا از این ایده استفاده کردیم که هر ترکیب محدب مناسب از $\lambda_i$ ها، خودش یک نقطه‌ی $x \in Q$ را مشخص می‌کند (با استفاده از فرمول ۱). منظور از "تناظر" است که هر نقطه‌ی شدنی داخل این برنامه ریزی خطی، می‌تواند با استفاده از معکوس تابع $f$ که دقیقا همان فرمول (۱) است، بهمان نقطه‌ی شدنی $x \in Q$ را بدهد.
+حال به سراغ نوشتن تابع هدف می‌رویم. از همان فرمول ۱ استفاده می‌کنیم تا با داشتن ضرایب $\lambda_i$، مقدار
+$c^Tx$
+آمده در $Q$ را باز نویسی کنیم:
+\begin{align*}
+	x \in Q \rightarrow \exists 0 \leq \lambda_1 \leq 1, ..., 0 \leq \lambda_t \leq 1 : x = \sum_i^t \lambda_i v_i \ \ , \ \ \sum_i^t \lambda_i = 1
+\end{align*}
+بنابراین می‌توانیم بنویسیم:
+\begin{align*}
+	c^Tx = c^T [\sum_i^t \lambda_i v_i]
+\end{align*}
+و تابع هدفمان مینیمم کردن عبارت بالاست.
+پس یک برنامه ریزی خطی نوشتیم که مقدار جواب بهینه‌ی آن دقیقا برابر با  مقدار جواب بهینه‌ در $Q$ است.
+\newline
+حال به ابعاد ماتریس $P$ استفاده شده در این برنامه ریطی خطی توجه کنید: با توجه به نحوه‌ی ساختن این ماتریس، $p$ دقیقا $L+1$ سطر و $t$ ستون دارد. با توجه به کراندار بودن فضای شدنی $P$، برنامه‌ی LP در یکی از  رئوس یا BFS های این برنامه‌ریزی خطی جواب بهینه را به ما می‌دهد. با توجه به اینکه هر BFS از درنظر گرفتن یک زیر مجموعه از ستون‌های P که مستقل خطی هستند ساخته می‌شود و اینکه رنک ستونی و رنک سطری P برابر است و همچنین اینکه P در مجموع $L+1$ سطر دارد، هر BFS حداکثر $L+1$ درایه‌ی نا ناصفر دارد. یادآوری می‌کنیم که هر درایه‌ی جواب‌های شدنی در LP، متناظر با ضرایب $\lambda_i$ است که طبق فرمول ۱، یک جواب شدنی برای $Q$ می‌دهد. بنابراین می‌توانیم با یک ترکیب محدب شامل حداکثر $L+1$ تا از راس‌های چند راسی $Q$، هر نقطه‌ی شدنی مساله‌ی $Q$ و در نتیجه جواب بهینه‌ی $Q$ را نشان دهیم که همان حکم مساله است.
+\end{document}

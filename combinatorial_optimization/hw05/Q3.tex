@@ -1,0 +1,79 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{HomeWorkTemplate}
+\usepackage{circuitikz}
+\usepackage[shortlabels]{enumitem}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{listings}
+
+\def\Max{\text{بیشینه کن}}
+\def\Min{\text{کمینه کن}}
+\def\st{\text{\rl{که}}}
+
+\usetikzlibrary{shapes.multipart}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tcolorbox}
+\usepackage{xepersian}
+\settextfont{XB Niloofar}
+\usetikzlibrary{arrows,automata}
+\usetikzlibrary{circuits.logic.US}
+\usepackage{changepage}
+\newcounter{problemcounter}
+\newcounter{subproblemcounter}
+\setcounter{problemcounter}{1}
+\setcounter{subproblemcounter}{1}
+\newcommand{\problem}[1]
+{
+	\subsection*{
+		پرسش
+%		\arabic{problemcounter} 
+%		\stepcounter{problemcounter}
+%		\setcounter{subproblemcounter}{1}
+		#1
+	}
+}
+\newcommand{\subproblem}{
+	\textbf{\harfi{subproblemcounter})}\stepcounter{subproblemcounter}
+}
+
+
+\begin{document}
+\handout
+{بهینه‌سازی ترکیبیاتی مقدماتی}
+{مرتضی علیمی، هانی احمد زاده}
+{بهار 1400}
+{اطلاعیه}
+{سروش زارع}
+{97100405}
+ {تمرین تحویلی 5}
+\problem{3}
+هدفمان این است که مساله را به این شکل مدل کنیم:
+\begin{align*}
+\text{\Min} &\quad  c^T f\\
+\text{\st} &\quad  0 \leq f\\
+&\quad \nabla(f)_i = b_i \quad \forall i \in V
+\end{align*}
+که $c_e$ هزینه‌ی کپی گرفتن از یال $e$ می‌باشد.
+
+حال سعی می‌کنیم مساله را طوری مدل کنیم که هر یال مجبور باشد حداقل ۱ بار استفاده شود (بدون هزینه)، و سپس به ازای هر استفاده‌ی مجدد، هزینه‌ای اضافه متحمل شود. سعی می‌کنیم این هزینه‌های اضافه را با $f$ مدل کنیم و خود $e$ اولیه را با عوض کردن $b_i$ ها مدل کنیم.
+ برای این کار کافیست برای هر یال
+$e=uv$
+مقدار $b_u$ 
+و
+$b_v$
+را به ترتیب با مقادیر
+$b_u + 1$
+و
+$b_u - 1$
+عوض کنیم. همین کار را به ازای تک تک یال‌ها انجام می‌دهیم و این کار عملا باعث می‌شود که هر یال حداقل یک بار استفاده شود.
+برای اینکه در نهایت یک گراف اویلری داشته باشیم، کافیست کاری کنیم که $b_i$ های اولیه (قبل از عوض شدن)، همگی برابر با ۰ باشند (باعث می‌شود درجه‌ی خروجی و ورودی رئوس پس از اضافه شدن یال‌ها برابر باشد). پس کافیست در ابتدا قرار دهیم $b = 0$ و با پیمایش روی یال‌های $e \in E$، مقادیر $b$ را آپدیت کنیم. در نهایت اگر مقدار آپدیت شده‌ی $b$ را با $b'$ نشان دهیم، مساله‌ی زیر را حل می‌کنیم:
+\begin{align*}
+\text{\Min} &\quad  c^T f\\
+\text{\st} &\quad  0 \leq f \\
+&\quad \nabla(f)_i = b_i' \quad \forall i \in V
+\end{align*}
+در جواب بهینه‌ی به دست آمده، اگر شار استفاده شده برای یال $e$ برابر با $f_e$ باشد، این مقدار نشان می‌دهد که $f_e$ بار کپی از یال $e$ اضافه شده است (به جز خود $e$ اولیه).
+
+\end{document}

@@ -1,0 +1,89 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{HomeWorkTemplate}
+\usepackage{circuitikz}
+\usepackage[shortlabels]{enumitem}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{listings}
+
+\usetikzlibrary{shapes.multipart}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tcolorbox}
+\usepackage{xepersian}
+\settextfont{XB Niloofar}
+\usetikzlibrary{arrows,automata}
+\usetikzlibrary{circuits.logic.US}
+\usepackage{changepage}
+\newcounter{problemcounter}
+\newcounter{subproblemcounter}
+\setcounter{problemcounter}{1}
+\setcounter{subproblemcounter}{1}
+\newcommand{\problem}[1]
+{
+	\subsection*{
+		پرسش
+%		\arabic{problemcounter} 
+%		\stepcounter{problemcounter}
+%		\setcounter{subproblemcounter}{1}
+		#1
+	}
+}
+\newcommand{\subproblem}{
+	\textbf{\harfi{subproblemcounter})}\stepcounter{subproblemcounter}
+}
+
+
+\begin{document}
+\handout
+{بهینه‌سازی ترکیبیاتی مقدماتی}
+{مرتضی علیمی، هانی احمد زاده}
+{نیم‌سال اول 1399\lr{-}1400}
+{اطلاعیه}
+{سروش زارع}
+{97100405}
+ {تمرین تحویلی 1}
+\problem{4}
+اثبات این سوال در جزوه آمده است که آن را در اینجا می‌آوریم.
+\newline
+چندوجهی جایگشت‌ها را با
+ با $\pi_n$
+ نشان می‌دهیم.
+\newline
+ابتدا یک راس
+$x \in \pi_n$
+را در نظر بگیرید. این راس متناظر با یک جایگشت است و  و به وضوح در مقدار ادعا شده برای $conv(X)$  قرار دارد زیرا جمع عناصر آن دقیقا
+$n(n+1)/2$
+است و هر $i$ عنصری از آن جمع حداقل
+$i(i+1)/2$
+دارند (با توجه به متمایز بودن درایه‌ها و طبیعی بودن آن‌ها و همچنین اینکه حداقل مقدار ممکن برای درایه‌ها برابر با ۱ است).
+\newline
+\newline
+حال یک راس $y$ درون $conv(X)$ ادعا شده درنظر بگیرید. ثابت می‌کنیم که
+$y$
+درون چندوجهی جایگشت‌ها (که آن را با $\pi_n$) قرار دارد و با این تفسیر اگر تمام راس‌های $conv(X)$ ادعا شده درون چندوجهی $\pi_n$ قرار داشته باشد، تمام نقاط $conv(X)$ درون این چندوجهی قرار دارد و در نتیجه‌ی اینکه هر کدام از 
+$pi_n$
+و $conv(X)$ زیر مجموعه‌ی دیگری هستند، 
+$conv(X)$
+ادعا شده دقیقا همان
+چندوجهی جایگشت‌ها یا
+$\pi_n$
+است که همان حکم سوال است.
+
+پس کافیست سمت باقی مانده‌ی ادعا را اثبات کنیم:
+یک راس دلخواه
+$y$
+درون $conv(X)$ ادعا شده درنظر بگیرید. با توجه به اینکه $y$ یک راس است، یک بردار $c$ وجود دارد که $y$ جواب یکتای
+$max\{c^Tx | x \in conv(x) \}$
+است.  اگر درایه‌های 
+$c_i$
+را به ترتیب
+$c_{i_1} \leq c_{i_2} \leq ... c_{i_n}$
+در نظر بگیریم، ادعا می‌کنیم که برای هر 
+$1 \leq k \leq n$
+داریم
+$y_{i_k} = k$
+و با اثبات این ادعا مشخص می‌شود که $y$ متناظر با یک جایگشت خواهد بود.
+اثبات این تساوی با برهان خلف و درنظر گرفتن کوچک ترین اندیس $k$ که در این تساوی صدق نمی‌کند به دست می‌آید که در صفحه‌ی ۴۸ جزوه و در مثال جایوجهی آمده است که در اینجا آن را تکرار نمی‌کنیم.
+\end{document}

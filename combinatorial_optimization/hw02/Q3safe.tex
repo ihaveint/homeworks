@@ -1,0 +1,136 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{HomeWorkTemplate}
+\usepackage{circuitikz}
+\usepackage[shortlabels]{enumitem}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{listings}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+\urlstyle{same}
+
+
+\usetikzlibrary{shapes.multipart}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tcolorbox}
+\usepackage{xepersian}
+\settextfont{XB Niloofar}
+\usetikzlibrary{arrows,automata}
+\usetikzlibrary{circuits.logic.US}
+\usepackage{changepage}
+\newcounter{problemcounter}
+\newcounter{subproblemcounter}
+\setcounter{problemcounter}{1}
+\setcounter{subproblemcounter}{1}
+\newcommand{\problem}[1]
+{
+	\subsection*{
+		پرسش
+%		\arabic{problemcounter} 
+%		\stepcounter{problemcounter}
+%		\setcounter{subproblemcounter}{1}
+		#1
+	}
+}
+\newcommand{\subproblem}{
+	\textbf{\harfi{subproblemcounter})}\stepcounter{subproblemcounter}
+}
+
+
+\begin{document}
+\handout
+{بهینه‌سازی ترکیبیاتی مقدماتی}
+{مرتضی علیمی، هانی احمد زاده}
+{بهار 1400}
+{اطلاعیه}
+{سروش زارع}
+{97100405}
+ {تمرین تحویلی 2}
+برای سادگی در نوشتن، به ازای هر گراف $G$ ماتریس گفته شده در صورت سوال را با
+$M(G)$
+نشان می‌دهیم. 
+همچنین به ازای یک سطر $i$ از $M(G)$ و یک رنگ آمیزی قرمز و آبی برای زیرمجموعه‌ی $C$ از ستون‌های
+$M(G)$، 
+$Sub(C, G)_i$
+را برابر با درایه‌ی $i$ ام جمع‌ ستون‌های قرمز منهای جمع ستون‌های آبی به ازای این رنگ‌آمیزی می‌گیریم.
+\problem{3}
+\subproblem
+طبق قضیه‌ی 
+\lr{Ghouila-Houri}
+نتیجه می‌گیریم که تماما تک‌پیمانه‌ای بودن گراف $G$ معادل این است که برای هر زیرمجموعه از ستون‌های $M(G)$،  یک دو رنگ آمیزی متساوی وجود داشته باشد. بنابراین فرض می‌کنیم که برای گراف $G$ این خاصیت برقرار است و می‌خواهیم نشان دهیم برای $H$ که یک زیرگراف القایی دلخواه از $G$ است نیز برقرار است. 
+به ازای هر زیرمجموعه‌ی $C$ از ستون‌های $M(G)$، دو رنگ آمیزی متساوی متناظر آن را با 
+\lr{coloring(C, G)}
+نشان می‌دهیم. توجه کنید که تمام ستون‌های $M(H)$ در $M(G)$ وجود دارند و صرفا ممکن است در سطر‌ها این اتفاق نیفتد. حال ادعا می‌کنیم که به ازای هر زیرمجموعه‌ی ستون‌ها مانند $C'$ از $H$، همان رنگ آمیزی
+\lr{S := coloring(C', G)}
+برای
+$H$
+نیز دورنگ آمیزی متساوی است.
+\newline
+\proof{}
+نشان می‌دهیم برای هر سطر $i$ در $M(H)$ که در تناظر با یک خوشه‌ی ماکسیمال $D$ در $H$ است، داریم: 
+$Sub(C, H)_i \in \{-1,0,1\}$
+(به ازای رنگ‌آمیزی $S$ که بالاتر تعریف شده است).
+دو حالت برای $D$ درنظر می‌گیریم:
+\begin{itemize}
+	\item $D$ در گراف $G$ نیز یک خوشه‌ی ماکسیمال باشد \newline \newline
+در این حالت، چون رنگ آمیزی $S$ دومتساوی است، سطر $i$ در $M(H)$ دقیقا متناظر با یک سطر $j$ در $M(G)$ است و درنتیجه داریم:
+\begin{align*}
+	\exists j: Sub(C, H)_i = Sub(C, G)_j \in \{-1,0,1\}
+\end{align*}
+از مجموع این دو حالت نتیجه می‌گیریم که اگر تعداد سطر‌های $M(H)$ برابر با $k$ باشد، داریم:
+\begin{align*}
+	\forall_{i \leq k} \ \ Sub(C, H)_i \in \{-1,0,1\}
+\end{align*}
+و درنتیجه رنگ‌آمیزی دومتساوی $S$ برای هر زیرمجموعه‌ی $C'$ از ستون‌های $G$، برای $H$  دومتساوی است و حکم سوال اثبات می‌شود.
+
+بخش آخر از این مورد نتیجه شد که $S$ برای $M(G)$ یک رنگ آمیزی دو متساوی فرض شده است.
+	\item $D$ در $G$ خوشه‌ی ماکسیمال نباشد و درنتیجه زیر مجموعه‌ی اکید یک خوشه‌ی ماکسمال $D'$ عضو $G$ باشد. \newline \newline
+در این حالت چالش اصلی این است که سطری متناظر با سطر $i$ ام در $M(H)$ در $M(G)$ وجود ندارد. اما کافیست توجه کنیم که اگر $D'$ متناظر با سطر $j$ ام در $M(G)$ باشد، داریم:
+\begin{align*}
+	Sub(C, H)_i = Sub(C, G)_j \in \{-1,0,1\}
+\end{align*}
+\end{itemize}
+پس اثبات کردیم که به ازای هر زیرمجموعه‌ی $C'$ از ستون‌های $H$، همان رنگ آمیزی
+\lr{coloring(C', G)}
+برای $H$ نیز دومتساوی است و درنتیجه حکم سوال اثبات می‌شود.
+\begin{latin}
+	$\square$
+\end{latin} 
+\subproblem
+دور پنج‌تایی یعنی $C_5$ را درنظر بگیرید. در این گراف خوشه‌های ماکسیمال شامل تک یال‌های این گراف هستند و بنابراین ماتریس گفته شده در صورت سوال برای $C_5$ دقیقا معادل با ماتریس وقوع $C_5$ است. از طرفی طبق قضایای کتاب می‌دانیم که ماتریس وقوع یه گراف غیر جهت دار $G$ تماما تک پیمانه‌ای است اگر و تنها اگر $G$ دو بخشی باشد.  از آنجایی که $C_5$ دور فرد دارد، در نتیجه دو بخشی نیست و درنتیجه تماما تک پیمانه‌ای نیست که همان خواسته‌ی سوال است.
+\begin{latin}
+	$\square$
+\end{latin} 
+\subproblem
+می‌دانیم که ماتریس وقوع گراف‌های دو بخشی $TU$ است. از طرفی در گراف دو بخشی دور فرد نداریم و درنتیجه تمام خوشه‌های ماکسیمال دقیقا متناظر با یک یال از گراف هستند. بنابراین ماتریس بررسی شده در صورت سوال، برای گراف‌های ۲ بخشی دقیقا همان ماتریس وقوع است و درنتیجه $TU$ است.
+\begin{latin}
+	$\square$
+\end{latin} 
+
+\subproblem
+طبق مقاله‌ی موجود در 
+\href{https://msp.org/pjm/1965/15-3/p11.xhtml}{لینک}
+این نتیجه را می‌پذیریم که یک گراف $G$ بازه‌ای است اگر و تنها اگر یک ترتیب
+\begin{align*}
+	M_1 , ... M_k
+\end{align*}
+برای خوشه‌های ماکسیمال  $G$ وجود داشته باشد به طوری که به ازای هر راس $v \in V(G)$، خوشه‌های ماکسیمالی که $v$ عضو آن‌هاست، یک زیر دنباله‌ی متوالی از ترتیب گفته شده بسازند.
+
+بنابراین ماتریس مدنظر در صورت سوال، ماتریسی 
+\underline{یک‌ متوالی} است  که در سوال ۲ و همچنین در جزوه اثبات شده است چنین ماتریسی تماما تک پیمانه‌ای است، در نتیجه حکم سوال اثبات می‌شود.
+\begin{latin}
+	$\square$
+\end{latin} 
+\end{document}

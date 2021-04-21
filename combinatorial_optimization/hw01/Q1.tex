@@ -1,0 +1,162 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{HomeWorkTemplate}
+\usepackage{circuitikz}
+\usepackage[shortlabels]{enumitem}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{listings}
+
+\usetikzlibrary{shapes.multipart}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tcolorbox}
+\usepackage{xepersian}
+\settextfont{XB Niloofar}
+\usetikzlibrary{arrows,automata}
+\usetikzlibrary{circuits.logic.US}
+\usepackage{changepage}
+\newcounter{problemcounter}
+\newcounter{subproblemcounter}
+\setcounter{problemcounter}{1}
+\setcounter{subproblemcounter}{1}
+\newcommand{\problem}[1]
+{
+	\subsection*{
+		پرسش
+%		\arabic{problemcounter} 
+%		\stepcounter{problemcounter}
+%		\setcounter{subproblemcounter}{1}
+		#1
+	}
+}
+\newcommand{\subproblem}{
+	\textbf{\harfi{subproblemcounter})}\stepcounter{subproblemcounter}
+}
+
+
+\begin{document}
+\handout
+{بهینه‌سازی ترکیبیاتی مقدماتی}
+{مرتضی علیمی، هانی احمد زاده}
+{نیم‌سال اول 1399\lr{-}1400}
+{اطلاعیه}
+{سروش زارع}
+{97100405}
+ {تمرین تحویلی 1}
+\problem{1}
+\subproblem
+
+\paragraph{\color{blue}\lr{ proof for $\leftarrow$}}
+اگر دو نقطه‌ی گوشه‌ای $A$ و $B$ مجاور باشند، طبق تعریف ابتدای سوال یعنی پاره خط واصل آن‌ها یک وجه یک بعدی از چند وجهی $P$ است. از طرفی طبق تعریف وجه می‌دانیم که هر وجه $P$ به صورت
+\begin{align*}
+F := P \cap \{x | c'^Tx = \delta \} 	
+\end{align*}
+
+قابل تعریف است که 
+$c'^Tx \leq \delta$
+یک نامساوی معتبر برای $P$ است.
+از آنجایی که وجه 1 بعدی شامل دو نقطه‌ی گوشه‌ای است، بنابراین تنها نقاط گوشه‌ای آن همین $A$ و $B$ هستند و طبق تعریف وجه در بالا، بردار $c$ وجود دارد که $A$ و $B$ تنها نقاط گوشه‌ای بهینه‌ی مساله‌ی
+\begin{align*}
+min\{c^Tx | x \in P \}	
+\end{align*}
+می‌باشند. ($c$ را قرینه‌ی $c'$ موجود در نامساوی معتبر
+$c'^Tx \leq \delta$
+تعریف می‌کنیم و با این کار 
+$c^Tx \geq -\delta$
+خواهد بود و فقط در نقاط $A$ و $B$ مینیمم خواهد شد).
+
+\begin{latin}
+	$\square$
+\end{latin}
+
+
+\paragraph{\color{blue}\lr{ proof for $\rightarrow$}}
+
+اگر بردار $c$ وجود داشته باشد به طوری که $A$ و $B$ تنها نقاط گوشه‌ای بهینه‌ی مساله‌ی
+\begin{align*}
+min\{c^Tx | x \in P \}	
+\end{align*}
+باشند و این مقدار مینیمم را با $\theta$ نشان دهیم، تمام نقاط چندوجهی $P$ در نامساوی
+$c^Tx \geq \theta$
+صدق می‌کنند.
+بنابراین داریم:
+\begin{align*}
+c^Tx \geq \theta \rightarrow -c^Tx \leq 	-\theta
+\end{align*}
+بنابراین می‌توانیم وجه زیر را برای $P$ تعریف کنیم:
+\begin{align*}
+	F := min\{x | c'^Tx = \delta \} \ \ | \ \  c' = -c , \delta = -\theta
+\end{align*}
+پس نقاط گوشه‌ای $A$ و $B$ تنها نقاط گوشه‌ای برای وجه $F$ می‌باشند و در نتیجه $F$ یک وجه یک بعدی است که شامل نقاط گوشه‌ای $A$ و $B$ است و طبق تعریف ابتدای سوال، $A$ و $B$ دو نقطه‌ی گوشه‌ای مجاور در چندوجهی $P$ خواهند بود.
+\begin{latin}
+	$\square$
+\end{latin}
+
+
+
+\subproblem
+اگر $M$ بردار مشخصه یک تطابق در گراف $G$ باشد، راس‌هایی از $G$ که $M$ آنها را درگیر می‌کند را را $f(M)$ نشان می‌دهیم. همچنین کل رئوس $G$ را با 
+$V(G)$
+ نشان می‌دهیم. طبق تعریف برای هر تطابق کامل مانند $M'$
+  داریم:
+\begin{align*}
+f(M') = V(G)
+\end{align*}
+همچنین برای دو تطابق $M_1$ و $M_2$، 
+$M_1 \cap M_2$
+را اشتراک بردار مشخصه‌های این دو تطابق تعریف می‌کنیم.
+\lemma{بردار مشخصه‌ی هر تطابق کامل مانند $M_1$، یک نقطه‌ی گوشه‌ای در $P$ است.}
+\proof{}
+\lemma{دو بردار مشخصه‌ی $M_1$ و $M_2$ دو نقطه‌ی گوشه‌ای مجاور هستند اگر و تنها اگر زیر گراف القایی $G$ با رئوس مربوط به $V(G) \backslash (M_1 \cap M_2)$ دقیقا ۲ تطابق کامل داشته باشد.}
+\proof{}
+در ابتدا قسمت (الف) این سوال را به عنوان فرض قبول می‌کنیم.
+\paragraph{\color{blue}\lr{ proof for $\rightarrow$}}
+اگر با ازای دو بردار مشخصه‌ی $M_1$ و $M_2$ شرط بالا برقرار باشد، می‌توانیم تعریف کنیم:
+\begin{equation*}
+  c_i := \left\{
+  \begin{array}{@{}ll@{}}
+    -2, & \text{if}\ (M_1 \cap M_2)_i = 1\\
+    \infty , & \text{otherwise}
+  \end{array}\right.
+\end{equation*} 
+توجه کنید که می‌توانیم به جای بی‌نهایت از هر عدد مثبت بزرگی استفاده کنیم.
+حال ادعا می‌کنیم بردار $c$ ساخته شده در شرط قسمت (الف) صدق می‌کند.
+با توجه به اینکه دنبال جواب‌های بهینه‌ی 
+$min \{c^Tx | x \in P\}$
+هستیم، و با توجه به اینکه کمترین ضرایب مربوط به $c$ در $M_1 \cap M_2$ تعریف شده است و بقیه‌ی ضرایب بسیار بزرگ هستند، تنها دو جواب $M_1$ و $M_2$ جواب‌های بهینه‌ی این مساله هستند و بنابراین طبق (الف) این دو نقطه، دو نقطه‌ی گوشه‌ای مجاور هستند.
+\begin{latin}
+	$\square$
+\end{latin}
+
+\paragraph{\color{blue}\lr{ proof for $\leftarrow$}}
+عکس نقیض این حالت را اثبات می‌کنیم. یعنی اگر تعداد تطابق‌های کامل زیر گراف القایی $G$با رئوس متناظر با
+$V(G) \backslash (M_1 \cap M_2)$
+مخالف با ۲ باشد، اثبات می‌کنیم که $M_1$ و $M_2$ نقاط گوشه‌ای مجاور نیستند.
+خود این حکم را نیز با برهان خلف اثبات می‌کنیم. یعنی فرض کنید زیر گراف کاهش یافته به رئوس
+$V' := V(G) \backslash (M_1 \cap M_2)$
+۲ تطابق کامل نداشته باشد ولی $M_1$ و $M_2$ دو تطابق کامل باشند. بنابراین می‌توانیم نتیجه بگیریم که
+$V'$
+اکیدا بیش از ۲ تطابق کامل دارد (وگرنه $M_1$ و $M_2$ تطابق کامل نبودند که تناقض است). این تطابق‌های کامل را 
+$D_1, D_2, ... D_k$
+که
+$k > 2$
+است نشان دهید.
+بردار $c$ را مشابه با طرف دیگر اثبات تعریف کنید. 
+حال تعریف می‌کنیم:
+\begin{align*}
+	C_i = D_i + (M_1 \cap M_2)
+\end{align*}
+در واقع هر کدام از $C_i$ ها بردار مشخصه‌ی تطابق کاملی است که یال‌های مربوط به $M_1 \cap M_2$ به همراه یال‌های مربوط به $D_i$ را دارد.
+می‌توان دید که به ازای هر $x \in \{C_1,C_2,...C_k\}$  
+مقدار
+$c^Tx$
+کمینه‌ی 
+$min \{c^Tx | x \in P\}$
+است و با توجه به اینکه $k > 2$، طبق (الف) نتیجه می‌گیریم که $M_1$ و $M_2$ دو نقطه‌ی گوشه‌ای مجاور نیستند. پس عکس نقیض را اثبات کردیم و حکم مد نظر اثبات شد، یعنی به ازای هر دو بردار مشخصه‌ی $M_1$ و $M_2$ که دو نقطه‌ی گوشه‌ای مجاور هستند، 
+زیر گراف القایی $G$ با رئوس مربوط به $V(G) \backslash (M_1 \cap M_2)$ دقیقا ۲ تطابق کامل دارد.
+\begin{latin}
+	$\square$
+\end{latin}
+
+\end{document}

@@ -1,0 +1,95 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{HomeWorkTemplate}
+\usepackage{circuitikz}
+\usepackage[shortlabels]{enumitem}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{listings}
+
+\def\Max{\text{بیشینه کن}}
+\def\Min{\text{کمینه کن}}
+\def\st{\text{\rl{که}}}
+
+\usetikzlibrary{shapes.multipart}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tcolorbox}
+\usepackage{xepersian}
+\settextfont{XB Niloofar}
+\usetikzlibrary{arrows,automata}
+\usetikzlibrary{circuits.logic.US}
+\usepackage{changepage}
+\newcounter{problemcounter}
+\newcounter{subproblemcounter}
+\setcounter{problemcounter}{1}
+\setcounter{subproblemcounter}{1}
+\newcommand{\problem}[1]
+{
+	\subsection*{
+		پرسش
+%		\arabic{problemcounter} 
+%		\stepcounter{problemcounter}
+%		\setcounter{subproblemcounter}{1}
+		#1
+	}
+}
+\newcommand{\subproblem}{
+	\textbf{\harfi{subproblemcounter})}\stepcounter{subproblemcounter}
+}
+
+
+\begin{document}
+\handout
+{بهینه‌سازی ترکیبیاتی مقدماتی}
+{مرتضی علیمی، هانی احمد زاده}
+{بهار 1400}
+{اطلاعیه}
+{سروش زارع}
+{97100405}
+ {تمرین تحویلی 5}
+\problem{2}
+ابتدا برنامه‌ی اصلی ($Primal$) را می‌نویسیم:
+
+\begin{align*}
+\text{\Min} &\quad  c^T f\\
+\text{\st} &\quad  0 \leq f \leq u \\
+&\quad \nabla(f)_i = b_i \quad \forall i \in V
+\end{align*}
+
+حال برنامه‌ی دوگان ($Dual$) را می‌نویسیم:
+
+\begin{align*}
+\text{\Max} &\quad  b^T \pi + u^Ty  \\
+\text{\st} &\quad  y_{i,j} + \pi_j - \pi_i \leq c_{i,j} \quad \forall e=ij \in E \\
+&\quad y, \pi \geq 0 
+\end{align*}
+
+طبق لنگی مکمل، اگر $f^*$ یک جواب شدنی برای $P$ و مجموعه‌ی 
+$B^* = \{y^*, \pi^*\}$
+یک جواب شدنی برای $D$ باشند، این جواب ها بهینه اند اگر و تنها اگر داشته باشیم:
+\begin{align}
+	f^*_e > 0 \rightarrow {y^*}_{i,j} + \pi^*_j - \pi^*_i = c_{i,j} \\
+	f^*_e < u_e \rightarrow y^*_e = 0
+\end{align}
+\lemma{تساوی سمت راست (۱) در صورت بهینه بودن $D$ همواره برقرار است و در واقع شرطی اضافه است.}
+\proof{}
+(فرض خلف) فرض کنید
+$B^* = \{y^*, \pi^*\}$
+یک جواب بهینه برای $D$ باشد.
+اگر $i,j$ موجود باشند به طوری که داشته باشیم
+\begin{align*}
+{y^*}_{i,j} + \pi^*_j - \pi^*_i < c_{i,j}
+\end{align*}
+می‌توانیم $y_{i,j}$ را به اندازه‌ی یک $\epsilon > 0$ افزایش دهیم به طوری که همچنان قیود $D$ برقرار باشند و علاوه بر آن، با توجه به مثبت بودن ظرفیت‌ها (درایه‌های $u$)، تابع هدف نیز افزایش پیدا می‌کند که با بهینه بودن $B$ در تناقض است. پس فرض خلف باطل است و لم (۱) اثبات می‌شود.
+
+حال با توجه به لم (۱)، می‌توانیم بنویسیم:
+\begin{align*}
+	{y^*}_{i,j} = c_{i,j} - \pi^*_j + \pi^*_i
+\end{align*}
+و در نتیجه شرط (۲) را می‌توانیم به صورت معادل زیر بنویسیم:
+\begin{align*}
+	\color{blue} f^*_e < u_e \rightarrow c_{i,j} - \pi^*_j + \pi^*_i = 0
+\end{align*}
+پس توانستیم شروط لنگی مکمل را بدون استفاده از $y^*$ بنویسیم.
+\end{document}
