@@ -1,0 +1,136 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{HomeWorkTemplate}
+\usepackage{circuitikz}
+\usepackage[shortlabels]{enumitem}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{listings}
+
+\def\Max{\text{بیشینه کن}}
+\def\Min{\text{کمینه کن}}
+\def\st{\text{\rl{که}}}
+
+\usetikzlibrary{shapes.multipart}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tcolorbox}
+\usepackage{xepersian}
+\settextfont{XB Niloofar}
+\usetikzlibrary{arrows,automata}
+\usetikzlibrary{circuits.logic.US}
+\usepackage{changepage}
+\newcounter{problemcounter}
+\newcounter{subproblemcounter}
+\setcounter{problemcounter}{1}
+\setcounter{subproblemcounter}{1}
+\newcommand{\problem}[1]
+{
+	\subsection*{
+		پرسش
+%		\arabic{problemcounter} 
+%		\stepcounter{problemcounter}
+%		\setcounter{subproblemcounter}{1}
+		#1
+	}
+}
+\newcommand{\subproblem}{
+	\textbf{\harfi{subproblemcounter})}\stepcounter{subproblemcounter}
+}
+
+
+\begin{document}
+\handout
+{بهینه‌سازی ترکیبیاتی مقدماتی}
+{مرتضی علیمی، هانی احمد زاده}
+{بهار 1400}
+{اطلاعیه}
+{سروش زارع}
+{97100405}
+ {تمرین تحویلی 8}
+\paragraph{\color{blue}
+در سوال ۲ ماتروید‌ها را به صورت
+$M = (S, \mathcal{I})$
+و
+$M^* = (S, \mathcal{I'})$
+فرض می‌کنیم. همچنین منظور از عبارتی مانند
+$span_M(x)$،
+$span(x)$
+در ماتروید $M$ و منظور از عبارتی مانند
+$span_{M'}(x)$،
+$span(x)$
+در ماتروید $M'$ می‌باشد(به جای
+$span$
+هر تابع دیگری ممکن است استفاده شود).
+}
+\problem{2}
+از برهان خلف استفاده می‌کنیم، فرض کنید حکم برقرار نباشد و درنتیجه مدار‌های $C$ و $C^*$ فقط در یک $x$ اشتراک داشته باشند.
+طبق تعریف دوگان، می‌دانیم که 
+$A \in \mathcal{I'}$
+ اگر و تنها اگر پایه‌ای برای $M$ در مجموعه‌ی 
+ $S \backslash A$
+  وجود داشته باشد. بنابراین طبق تعریف زنجیر می‌دانیم:
+\begin{align}
+	Y \in \mathcal{I'} \quad \forall Y \subset C^* \rightarrow C^* - x \in \mathcal{I'}
+\end{align}
+\lemma{ادعا می‌کنیم که
+\begin{align*}
+ x \notin span_M(S \backslash C^*)	
+\end{align*}
+}
+\proof{}
+این ادعا با برهان خلف اثبات می‌شود، فرض کنید این طور نباشد و در نتیجه 
+$x \in span_M(S \backslash C^*)	$
+بنابراین  داریم
+\begin{align}
+	rank(span_M(S \backslash C^*)) = rank(span_M(S \backslash C^* + x))
+\end{align}
+بنابراین در عبارت (۱)، می‌توانیم $x$ را نیز به مجموعه‌ی 
+$Y = C^* - x$
+اضافه کنیم و $Y$ حاصل همچنان عضو $\mathcal{I'}$ باقی می‌ماند (زیرا طبق (۲)، 
+$rank_M(S - Y)$
+کاهش نمی‌یابد). از طرفی می‌دانستیم که $C^*$ یک مدار است و عضو $\mathcal{I'}$ نیست، از تناقض حاصل نتیجه می‌گیریم که فرض خلف باطل است و لم برقرار است.
+\begin{latin}
+	$\square$
+\end{latin}
+
+\lemma{
+مجموعه‌ی
+$S \backslash C^*$
+را درنظر بگیرید. از آنجایی که $C$ یک مدار است، $C - x$ یک عضو مستقل برای $M$ است و می‌توانیم آن را به یک پایه برای 
+$S \backslash C^*$
+ گسترش دهیم. پایه‌ی حاصل را $B$ بنامید. ادعا می‌کنیم که 
+$B' := B + x$
+ همچنان مستقل است.
+}
+\proof{}
+فرض کنید اینطور نباشد (برهان خلف). بنابراین داریم:
+\begin{align*}
+	x \in span_M(S \backslash C^* )
+\end{align*}
+که به طور مستقیم با لم (۱) در تناقض است. بنابراین فرض خلف باطل است و لم(۲) اثبات می‌شود.
+
+\lemma{
+ $B'$ به دست آمده در لم (۲) را درنظر بگیرید   
+داریم:
+\begin{align*}
+	C \subseteq B' \rightarrow C \in \mathcal{I}
+\end{align*}
+}
+\proof{}
+طبق اصول موضوعه‌ی ماتروید، داریم:
+\begin{align*}
+	A \in \mathcal{I} , B \subseteq A \rightarrow B \in \mathcal{I}
+\end{align*}
+که دقیقا مطابق با لم ۳ است (توجه کنید دلیل اینکه
+$C \subseteq B'$
+این است که هنگام ساختن $B$ ابتدا از عضو مستقل 
+$C - x$
+شروع کردیم و در نهایت $x$ را به $B$ اضافه کردیم، بنابراین تمام اعضای $C$ در $B'$ قرار دارند و $C \subseteq B'$).
+
+لم ۳ به وضوح با اینکه $C$ یک زنجیر است و درنتیجه 
+$C \notin \mathcal{I}$
+ در تناقض است. پس فرض خلف باطل است و امکان ندارد که
+$|C \cap C^*| = 1$.
+در نتیجه حکم سوال اثبات شد. 
+\end{document}
