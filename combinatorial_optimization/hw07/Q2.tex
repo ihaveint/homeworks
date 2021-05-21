@@ -1,0 +1,167 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{HomeWorkTemplate}
+\usepackage{circuitikz}
+\usepackage[shortlabels]{enumitem}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{listings}
+
+\def\Max{\text{بیشینه کن}}
+\def\Min{\text{کمینه کن}}
+\def\st{\text{\rl{که}}}
+
+\usetikzlibrary{shapes.multipart}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tcolorbox}
+\usepackage{xepersian}
+\settextfont{XB Niloofar}
+\usetikzlibrary{arrows,automata}
+\usetikzlibrary{circuits.logic.US}
+\usepackage{changepage}
+\newcounter{problemcounter}
+\newcounter{subproblemcounter}
+\setcounter{problemcounter}{1}
+\setcounter{subproblemcounter}{1}
+\newcommand{\problem}[1]
+{
+	\subsection*{
+		پرسش
+%		\arabic{problemcounter} 
+%		\stepcounter{problemcounter}
+%		\setcounter{subproblemcounter}{1}
+		#1
+	}
+}
+\newcommand{\subproblem}{
+	\textbf{\harfi{subproblemcounter})}\stepcounter{subproblemcounter}
+}
+
+
+\begin{document}
+\handout
+{بهینه‌سازی ترکیبیاتی مقدماتی}
+{مرتضی علیمی، هانی احمد زاده}
+{بهار 1400}
+{اطلاعیه}
+{سروش زارع}
+{97100405}
+ {تمرین تحویلی 7}
+\problem{2}
+اندیس‌هایی از $s_i$ که در $T$ قرار دارند را با
+$c_1, ... c_k$
+نشان دهید. بنابراین داریم:
+\begin{align*}
+	T = \{s_{c_1}, ... s_{c_k}\}
+\end{align*}
+همچنین تعریف می‌کنیم:
+\begin{align*}
+	V_i &= \{s_1, ... s_{c_i - 1} \} \quad \forall 1 \leq i \leq k \\
+	U_i &= \{s_{c_1}, ..., s_{c_{i - 1}}\} \quad \forall 1 \leq i \leq k \\
+	V_{k+1} &= \{s_1, ..., s_m\} \\
+	U_{k + 1} &= \{s_{c_1}, ... s_{c_k}\} = T
+\end{align*}
+توجه کنید که طبق این تعاریف داریم:
+\begin{align*}
+	V_{i + 1} = V_{i} + s_{c_i} \\
+	rank(V_1) = 0
+\end{align*}
+طبق تعریف $T$، داریم:
+\begin{align}
+	rank(V_i) < rank(V_i + s_{c_i}) \quad \forall 1 \leq i \leq k
+\end{align}
+
+\lemma{
+داریم:
+\begin{align*}
+	rank(V_i + s_{c_i}) = rank(V_i) + 1 \quad \forall 1 \leq i \leq k
+\end{align*}
+}
+
+\proof{
+با توجه به نامساوی (۱)، کافیست اثبات کنیم
+\begin{align*}
+	rank(V_i + s_{c_i}) \leq rank(V_i) + 1 \quad \forall 1 \leq i \leq k
+\end{align*}
+این موضوع نیز تقریبا واضح است، فرض کنید این طور نباشد و یک مجموعه‌ی مستقل 
+$b_1, ..., b_l$
+برای 
+$V_i + s_{c_i}$
+وجود داشته باشد به طوری که
+$l > rank(V_i) + 1$.
+از آنجایی که حداکثر یکی از این $b_i$ ها برابر با $s_{c_i}$ می‌باشد، با حذف آن $b_i$ یک مجموعه‌ی مستقل $B$ به دست می‌آید به طوری که: 
+\begin{align*}
+	|B| \geq l - 1 > rank(V_i)
+\end{align*}
+از طرفی با توجه به اینکه 
+$|B| \subseteq V_i + s_{c_i} - s_{c_i} = V_i$
+خود $|B|$ یک مجموعه‌ی مستقل برای $V_i$ است و این با فرض اینکه 
+$rank(V_i) < l -1$
+در تناقض است. از تناقض حاصل نتیجه می‌گیریم که
+\begin{align*}
+	rank(V_i + s_{c_i}) \leq rank(V_i) + 1 \quad \forall 1 \leq i \leq k
+\end{align*}
+و از ترکیب این نامساوی و نامساوی (۱) حکم لم اثبات می‌شود.
+}
+
+
+\lemma{
+داریم:
+\begin{align*}
+	rank(U_i) = rank(V_i) \quad \forall 1 \leq i \leq k+1
+\end{align*}
+}
+\proof{}
+با توجه به اینکه
+$U_i \subseteq V_i$،
+بنابراین 
+\begin{align}
+	rank(U_i) \leq rank(V_i) \quad \forall 1 \leq i \leq k+1
+\end{align}
+از طرفی فرض کنید یک 
+$1 \leq i \leq k+1$
+وجود داشته باشد که
+$rank(V_i) > rank(U_i)$.
+در این صورت در هنگام ساخته شدن $T$، حداقل یک عضو 
+$V_i \backslash U_i$
+نیز باید در $T$ قرار می‌گرفت و $T$ به اشتباه ساخته شده است، که تناقض حاصل نشان می‌دهد 
+\begin{align}
+	rank(V_i) \leq rank(U_i) \quad \forall 1 \leq i \leq k+1
+\end{align}
+از ۲ نامساوی (2) و (3) نتیجه می‌گیریم:
+\begin{align}
+	rank(U_i) = rank(V_i) \quad \forall 1 \leq i \leq k + 1
+\end{align}
+که همان حکم لم است.
+
+\lemma{
+داریم:
+\begin{align*}
+	rank(U_i) = |U_i| = i - 1 \quad \forall 1 \leq i \leq k+1
+\end{align*}
+و درنتیجه تمام $U_i$ ها مستقل هستند.
+}
+\proof{}
+از لم (۱) می‌توانیم نتیجه بگیریم که
+\begin{align*}
+	rank(V_i) = i - 1 \quad \forall 1 \leq i \leq k+1
+\end{align*}
+که از ترکیب این تساوی با لم (۲) داریم:
+\begin{align*}
+	rank(U_i) = rank(V_i) = i - 1 \quad \forall 1 \leq i \leq k + 1
+\end{align*}
+با توجه به اینکه هر $U_i$ دقیقا $i - 1$ عضو دارد، داریم:
+\begin{align*}
+	rank(U_i) = i - 1 = |U_i| \quad \forall 1 \leq i \leq k + 1
+\end{align*}
+پس لم(۳) اثبات می‌شود.
+\newline
+\newline
+در نتیجه‌ی  لم(۳)، 
+$U_{k+1} = T$
+نیز مستقل است که همان حکم سوال است.
+\begin{latin}
+	$\square$
+\end{latin}
+\end{document}

@@ -1,0 +1,89 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{HomeWorkTemplate}
+\usepackage{circuitikz}
+\usepackage[shortlabels]{enumitem}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{listings}
+
+\def\Max{\text{بیشینه کن}}
+\def\Min{\text{کمینه کن}}
+\def\st{\text{\rl{که}}}
+
+\usetikzlibrary{shapes.multipart}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tcolorbox}
+\usepackage{xepersian}
+\settextfont{XB Niloofar}
+\usetikzlibrary{arrows,automata}
+\usetikzlibrary{circuits.logic.US}
+\usepackage{changepage}
+\newcounter{problemcounter}
+\newcounter{subproblemcounter}
+\setcounter{problemcounter}{1}
+\setcounter{subproblemcounter}{1}
+\newcommand{\problem}[1]
+{
+	\subsection*{
+		پرسش
+%		\arabic{problemcounter} 
+%		\stepcounter{problemcounter}
+%		\setcounter{subproblemcounter}{1}
+		#1
+	}
+}
+\newcommand{\subproblem}{
+	\textbf{\harfi{subproblemcounter})}\stepcounter{subproblemcounter}
+}
+
+
+\begin{document}
+\handout
+{بهینه‌سازی ترکیبیاتی مقدماتی}
+{مرتضی علیمی، هانی احمد زاده}
+{بهار 1400}
+{اطلاعیه}
+{سروش زارع}
+{97100405}
+ {تمرین تحویلی 7}
+\problem{1}
+الگوریتم زیر را درنظر بگیرید:
+\begin{enumerate}
+	\item قرار بده $C = \{y\}$.
+	\item اگر عضوی از $A \backslash C$ مانند $t$ وجود داشت به طوری که $C + t \in \mathcal{I}$، آنگاه قرار بده $C = C + t$ و باز به همین مرحله‌ی ۲ برگرد. درغیر اینصورت الگوریتم به پایان می‌رسد و خروجی را برابر با $C$ قرار بده.
+\end{enumerate}
+
+با توجه به تعریف این الگوریتم، واضح است که خروجی $C$ عضو $\mathcal{I}$ است (زیرا در هر مرحله $C$ طوری بزرگ می‌شود که این شرط برقرا بماند).
+\lemma{اگر خروجی الگوریتم را با $C$ نشان دهیم، $C$ دقیقا برابر است با $A - x +y$}
+\proof{}
+فرض کنید این طور نباشد(برهان خلف)، از آنجایی که در هربار اجرای الگوریتم $|C|$ دقیقا یک واحد افزایش پیدا می‌کند و با توجه به اینکه $x$ و $y$ دو عنصر موازی هستند، هیچ گاه $x$ و $y$ هر دو در $C$ قرار نمی‌گیرند (در غیر اینصورت در یک مرحله خواهیم داشت
+\begin{align*}
+	x , y \in C, C \in \mathcal{I} \rightarrow \{x,y\} \in \mathcal{I}
+\end{align*} 
+دلیل این مورد این است که طبق اصول موضوعه‌ی ماتروید،  داریم:
+\begin{align*}
+\{x,y\} \subseteq C , C \in \mathcal{I} \rightarrow \{x,y\} \in \mathcal{I}
+\end{align*}
+که با فرض اینکه $x$ و $y$ دو عنصر موازی‌اند در تناقض است).
+پس از آنجایی که $C$ در ابتدا شامل $y$ است، نتیجه می‌گیریم هیچ گاه $x$ درون $C$ قرار نمی‌گیرد. بنابراین در هر بار اجرای الگوریتم، یک عنصر از $A - x$ به $C$ اضافه می‌شود و در نهایت پس از تعدادی بار این روند متوقف می‌شود، اگر تمام اعضای $A - x$ به $C$ اضافه نشوند(همان فرض خلف)، در نهایت داریم:
+\begin{align*}
+|C| < |A - x + y| = |A|	
+\end{align*}
+از طرفی طبق تعریف ماتروید، می‌دانیم که با توجه به اینکه
+$|A| > |C| , A,C \in \mathcal{I}$
+، یک عضو
+$t \in A \backslash C$
+پیدا می‌شود که
+$t + C \in \mathcal{I}$.
+با کمی دقت می‌بینیم که مرحله‌ی ۲ الگوریتم دقیقا در تلاش برای پیدا کردن همین $t$ بود، بنابراین الگوریتم نمی‌تواند در این مرحله به پایان رسیده باشد و از تناقض حاصل نتیجه می‌گیریم که فرض خلف باطل است و $C$نهایی دقیقا برابر است با
+$A - x +y$.
+با توجه به اینکه در هر بار اجرای الگوریتم شرط
+$C \in \mathcal{I}$
+برقرار می‌ماند، در نهایت داریم:
+\begin{align*}
+	A - x + y = C \in \mathcal{I}
+\end{align*}
+که همان حکم سوال است.
+\end{document}

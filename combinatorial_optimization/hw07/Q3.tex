@@ -1,0 +1,111 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{HomeWorkTemplate}
+\usepackage{circuitikz}
+\usepackage[shortlabels]{enumitem}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{listings}
+
+\def\Max{\text{بیشینه کن}}
+\def\Min{\text{کمینه کن}}
+\def\st{\text{\rl{که}}}
+
+\usetikzlibrary{shapes.multipart}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tcolorbox}
+\usepackage{xepersian}
+\settextfont{XB Niloofar}
+\usetikzlibrary{arrows,automata}
+\usetikzlibrary{circuits.logic.US}
+\usepackage{changepage}
+\newcounter{problemcounter}
+\newcounter{subproblemcounter}
+\setcounter{problemcounter}{1}
+\setcounter{subproblemcounter}{1}
+\newcommand{\problem}[1]
+{
+	\subsection*{
+		پرسش
+%		\arabic{problemcounter} 
+%		\stepcounter{problemcounter}
+%		\setcounter{subproblemcounter}{1}
+		#1
+	}
+}
+\newcommand{\subproblem}{
+	\textbf{\harfi{subproblemcounter})}\stepcounter{subproblemcounter}
+}
+
+
+\begin{document}
+\handout
+{بهینه‌سازی ترکیبیاتی مقدماتی}
+{مرتضی علیمی، هانی احمد زاده}
+{بهار 1400}
+{اطلاعیه}
+{سروش زارع}
+{97100405}
+ {تمرین تحویلی 7}
+\problem{3}
+این سوال را با مدل سازی به کمک مساله‌ی \lr{maximum flow} حل می‌کنیم.
+در گراف جهت دار $G$، برای هر یال ظرفیت ۱ را قرار می‌دهیم. سپس به ازای هر 
+$A \subseteq S$، 
+مساله‌ی \lr{max flow} زیر را درنظر می‌گیریم و آن را $MF(A)$ می‌نامیم و همچنین مقدار شار بیشینه در این مساله را به طور نمادین با $|MF(A)|$ نشان می‌دهیم:
+\begin{itemize}
+	\item یک راس $sink$ به گراف اضافه می‌کنیم و از هر راس $a \in A$ یک یال با ظرفیت ۱ از $a$ به $sink$ قرار می‌دهیم.
+	\item یک راس $source$ به گراف اضافه می‌کنیم و از $source$ به $x$ یک یال با ظرفیت $|A|$ قرار می‌دهیم.
+	\item \lr{maximum flow} از $source$ به $sink$ را به دست می‌آوریم.
+\end{itemize}
+ادعا می‌کنیم که با این نحوه‌ی مدل سازی، 
+$|MF(A)| = |A|$
+ خواهد بود اگر و تنها اگر $|A|$ مسیر یال مجزا با رئوس انتهایی متمایز از $x$  به $A$ وجود داشته باشد.
+\proof{}
+وزن دهی یال ها طوری انجام شده است که اگر flow پیدا شده‌ی نهایی را درنظر بگیریم، تشکیل تعدادی مسیر یال مجزا می‌دهد. همچنین از آنجایی که تنها یال‌های ورودی به $sink$ از رئوس $A$ می‌باشد و وزن هر کدام از این یال ها دقیقا ۱ است، هر مسیر در نهایت به یکی از رئوس $A$ رسیده و هیچ کدام به دو راس مشترک انتهایی نرسیده‌اند.پس از آنجایی که ظرفیت ورودی به $x$ برابر با $|A|$ است، شار بیشینه برابر با $|A|$ خواهد بود اگر و تنها اگر  $|A|$ مسیر یال مجزا با شرایط گفته شده با شروع از $x$ به $A$ وجود داشته باشد.
+بنابراین می‌توانیم صورت سوال را به این گونه عوض کنیم که
+\begin{align*}
+	A \subseteq S, |MF(A)| = |A| \rightarrow A \in \mathcal{I}
+\end{align*}
+حال اثبات می‌کنیم سیستم
+$M = (S, \mathcal{I})$
+با این قاعده‌ی جایگزین، یک ماتروید است. کافی است سه مورد زیر را اثبات کنیم:
+\begin{enumerate}
+	\item \begin{align*} \phi \in \mathcal{I} \end{align*}
+برقراری این مورد واضح است، زیرا از $x$ به مجموعه‌ی تهی حداقل ۰ مسیر یال مجزا وجود دارد :)
+
+	\item \begin{align*}
+		A \in \mathcal{I} , B \subseteq A \rightarrow B \in \mathcal{I}
+	\end{align*}
+	این	مورد نیز تقریبا واضح است، زیرا اگر فرض کنیم از $x$ به مجموعه‌ی $A$ به تعداد $|A|$ مسیر یال مجزا با رئوس انتهایی متفاوت وجود دارد و در بین این مسیر‌‌ها مسیر از $x$
+به
+$a \in A$
+را با
+$P_a$
+نشان دهیم، برای هر
+$B \subseteq A$
+می‌توانیم 
+مجموعه‌ی مسیر‌های
+\begin{align*}
+	\{P_{a'} | a' \in B \} 
+\end{align*}
+را درنظر بگیریم، با توجه به اینکه این مسیر‌ها در مساله‌ی $MF(A)$ یال مجزا بوده اند و رئوس انتهایی مشترک نداشته اند، در مساله‌ی $MF(B)$ نیز این شروط را دارند و در نتیجه
+$B \in \mathcal{I}$.
+
+	\item 
+	\begin{align*}
+		A,B \in \mathcal{I} , |A| < |B| \rightarrow \exists x \in B \backslash A : A + x \in \mathcal{I}
+	\end{align*}
+برای اثبات این مورد، یک اجرا از الگوریتم 
+\lr{ford fulkerson}
+در نظر بگیرید که برای مساله‌ی $MF(B)$ اجرا می‌شود. از آنجایی که در این الگوریتم هیچ فرضی راجع به ترتیب جریان‌های پیدا شده نداریم و تنها تضمین این است که در نهایت یک جریان بهینه پیدا می‌کنیم، می‌توانیم فرض کنیم که در $|A|$ مرحله‌ی اول، $|A|$ مسیر یال مجزا به رئوس $A$ پیدا شده است. 
+از طرفی داریم:
+\begin{align*}
+|B| > |A| , |B| \in \mathcal{I} \rightarrow |MF(B)| = |B| > |A|	
+\end{align*}
+بنابراین در مرحله‌ي بعد الگوریتم، حتما می‌توان جریان‌ بهتری پیدا کرد، از طرفی با توجه به ساختار مساله‌ی $MF(B)$، تنها شیوه‌ی ممکن برای بهبود جریان‌ قبلی، این است که جریان‌ها را کمی عوض کنیم به طوری که همچنان به $|A|$ راس از $A$ مسیر‌های یال مجزا داشته باشیم ولی به یک راس جدید $x \in B \backslash A$ نیز مسیر داشته باشیم که هیچ اشتراک یالی با مسیر‌های پیشین ندارد. پس همین $x$ یک کاندید معتبر است به طوری که
+$x + A \in \mathcal{I}$
+و درنتیجه مورد ۳ نیز اثبات می‌شود.
+\end{enumerate}
+\paragraph{در نتیجه‌ی ۳ مورد اثبات شده‌ی بالا، سیستم $M = (S,\mathcal{I})$ یک ماتروید است و حکم سوال اثبات می‌شود.}
+\end{document}

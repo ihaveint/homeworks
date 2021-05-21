@@ -1,0 +1,219 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{HomeWorkTemplate}
+\usepackage{circuitikz}
+\usepackage[shortlabels]{enumitem}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{listings}
+
+\def\Max{\text{بیشینه کن}}
+\def\Min{\text{کمینه کن}}
+\def\st{\text{\rl{که}}}
+
+\usetikzlibrary{shapes.multipart}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tcolorbox}
+\usepackage{xepersian}
+\settextfont{XB Niloofar}
+\usetikzlibrary{arrows,automata}
+\usetikzlibrary{circuits.logic.US}
+\usepackage{changepage}
+\newcounter{problemcounter}
+\newcounter{subproblemcounter}
+\setcounter{problemcounter}{1}
+\setcounter{subproblemcounter}{1}
+\newcommand{\problem}[1]
+{
+	\subsection*{
+		پرسش
+%		\arabic{problemcounter} 
+%		\stepcounter{problemcounter}
+%		\setcounter{subproblemcounter}{1}
+		#1
+	}
+}
+\newcommand{\subproblem}{
+	\textbf{\harfi{subproblemcounter})}\stepcounter{subproblemcounter}
+}
+
+
+\begin{document}
+\handout
+{بهینه‌سازی ترکیبیاتی مقدماتی}
+{مرتضی علیمی، هانی احمد زاده}
+{بهار 1400}
+{اطلاعیه}
+{سروش زارع}
+{97100405}
+ {تمرین تحویلی 7}
+\paragraph{\color{blue}
+در این سوال هر جا از $rank$ یا $rank_M$ استفاده شده منظور  $rank$ برای ماتروید  
+$M = (S, \mathcal{I})$
+ که در سوال آمده است می‌باشد.
+}
+\problem{4}
+می‌دانیم که می‌توان یک ماتروید را به کمک پایه‌های آن توصیف کرد. پس تنها حالتی که حکم سوال ممکن است درست باشد، این است که فرض کنیم ماترویدی که پایه‌های آن به شکل گفته شده است وجود دارد و آن ماتروید را به کمک آن پایه‌ها توصیف کنیم و در نهایت اثبات کنیم که سیستم نوشته شده واقعا یک ماتروید است. پس یک سیستم $M_2$ را طوری می‌سازیم که (با فرض درست بودن حکم سوال)، پایه‌هایش به شکل گفته شده در صورت سوال باشند. در نهایت کافیست نشان دهیم که $M_2$ واقعا ماتروید است.
+قرار می‌دهیم
+\begin{align*}
+	M_2 &= (S, \mathcal{I'} ) \\
+	x \in \mathcal{I'} \iff x &\subseteq S , \exists T \quad | \quad x \subseteq T \subseteq S : |T| = k , r_M(T) = m
+\end{align*}
+به وضوح اگر $M_2$ ماتروید باشد، پایه‌هایش به شکل گفته شده در صورت سوال خواهند بود.
+\newline
+حال یک مجموعه‌ی $A \subseteq S$ را گوگولی می‌نامیم اگر داشته باشیم:
+\begin{align*}
+	|A| \leq k , k - |A| \geq m - rank(A)
+\end{align*}
+توجه کنید که همواره داریم:
+$m \geq rank(A)$
+و درنتیجه:
+\begin{align*}
+	k - |A| \geq m - rank(A) \rightarrow k - |A| \geq 0 \rightarrow k \geq |A|
+\end{align*}
+و درنتیجه شرط
+$|A| \leq k$
+شرطی زائد است.
+\lemma{
+مجموعه‌ی
+$A \subseteq S$
+گوگولی است اگر و تنها اگر 
+$A \in \mathcal{I'}$
+}
+\proof{}
+ابتدا اثبات می‌کنیم که اگر
+$A \in \mathcal{I'}$
+مجموعه‌ی $A$ گوگولی است. داریم:
+\begin{align*}
+	A \in \mathcal{I'} \rightarrow \exists T \quad | \quad A \subseteq T \subseteq S : |T| = k , r_M(T) = m
+\end{align*}
+الگوریتمی را درنظر بگیرید که از $C := A$ شروع می‌کند و در هر مرحله یک عضو $T \backslash C$ را به $C$ اضافه می‌کند تا در نهایت به $C = T$ برسد. می‌دانیم که با اضافه کردن هر $x$ به $C$، خواهیم داشت:
+\begin{align*}
+	rank_M(C) \leq rank_M(C + x) \leq rank_M(C) + 1
+\end{align*}
+بنابراین از آنجایی که این الگوریتم در مجموع 
+\begin{align*}
+	|T| - |A| = k - |A|	
+\end{align*}
+عنصر را به $C=A$ اولیه اضافه می‌کند، در نهایت خواهیم داشت:
+\begin{align*}
+	rank_M(C_{final}) = rank_M(T) = m \leq k - |A| + rank_M(A) \\ \rightarrow m - rank(A) \leq k - |A|
+\end{align*}
+در نتیجه $A$ طبق تعریف، گوگولی است.
+\newline
+حال یک $A$ گوگولی دلخواه را درنظر بگیرید، اثبات می‌کنیم که $A \in \mathcal{I'}$.
+با توجه به گوگولی بودن $A$، داریم:
+\begin{align*}
+	|A| \leq k , k - |A| \geq m - rank(A)
+\end{align*}
+به راحتی می‌توانیم از مجموعه‌ی $C := A$ شروع کنیم و با اضافه کردن حداکثر 
+$m - rank(A) \leq k - |A|$
+عنصر از $S$، به یک مجموعه‌ی $C$ بزرگتر برسیم به طوری که
+$rank(C) = m , C \leq k$
+اگر 
+$C = k$
+که همین $C$ را می‌توانیم به عنوان $T$ در تعریف $M_2$ درنظر بگیریم و $A \in \mathcal{I'}$ اثبات می‌شود. اگر 
+$|C| < k$
+به راحتی 
+$k - |C|$
+عنصر دلخواه از $S$ را به $C$ اضافه می‌کنیم تا در نهایت داشته باشیم 
+$|C| = k$
+و مجددا $C$ نهایی را می‌توانیم به عنوان $T$ در تعریف $M_2$ درنظر بگیریم و در نتیجه 
+$A \in \mathcal{I'}$.
+
+ 
+\lemma{$M_2$ یک ماتروید است.}
+\proof{}
+کافیست موارد زیر را نشان دهیم:
+\begin{enumerate}
+	\item 
+\begin{align*}
+	\phi \in \mathcal{I'}
+\end{align*}
+	این مورد به وضوح برقرار است، زیرا مجموعه‌ي تهی قابل گسترش به یک پایه برای $M$ است و اگر این پایه را با $B$ نشان دهیم، از آنجایی که
+\begin{align*}
+	|B| = m < k
+\end{align*}
+می‌توان به راحتی تعدادی عضو دلخواه دیگر به آن اضافه کرد به طوری که به مجموعه‌ی $B'$ برسیم که $|B'| = k$ (طبیعتا $rank$ ممکن نیست از $m$ بیشتر شود زیرا در آن صورت یک پایه‌ با اندازه‌ی بیش از $m$ وجود دارد که با این قضیه که اندازه‌ی تمام پایه‌ها در $M$ برابرند در تناقض است).
+\item
+\begin{align*}
+	B \subseteq A, A \in \mathcal{I'} \rightarrow B \in \mathcal{I'}
+\end{align*}
+با توجه به تعریف $M_2$ داریم:
+\begin{align*}
+\exists T \quad | \quad A \subseteq T \subseteq S : |T| = k , r_M(T) = m
+\end{align*}
+از طرفی داریم:
+\begin{align*}
+	B \subseteq A \rightarrow B \subseteq A \subseteq T \subseteq S : |T| = k , r_M(T) = m
+\end{align*}
+بنابراین $B \in \mathcal{I'}$.
+\item 
+\begin{align*}
+A,B \in \mathcal{I'} , |A| < |B| \rightarrow \exists x \in B \backslash A : A + x \in \mathcal{I'}
+\end{align*}
+لبق لم (۱)، دو مجموعه‌ی $A$ و $B$ گوگولی هستند. بنابراین داریم:
+\begin{align*}
+	k - |B| \geq m - rank(B) \\
+	k - |A| \geq m - rank(A)
+\end{align*}
+حال دو حالت زیر را درنظر می‌گیریم:
+\begin{itemize}
+	\item 
+	\begin{align*}
+		rank_M(B) > rank_M(A)
+	\end{align*}
+%	در این حالت ادعا می‌کنیم که یک
+%	$x \in B \backslash A$
+%	وجود دارد به طوری که
+%	$rank(A + x) > rank(A)$. فرض کنید این طور نباشد، بنابراین داریم:
+%	\begin{align*}
+%		rank(A + x) = rank(A) \quad \forall x \in B \backslash A
+%	\end{align*}
+%	می‌توان دید که در این صورت، می‌توانیم به ترتیب تک تک اعضای $B$ را به $A$ اضافه کنیم بدون آنکه $rank$ افزایش پیدا کند، یعنی در نهایت می‌توانیم ببینیم که
+%	$rank(B) = rank(B)$
+%	که با فرض 
+%	$rank(B) > rank(A)$
+%	در تناقض است. بنابراین در این حالت حتما $x$ مدنظر پیدا می‌شود.
+یک پایه‌ی $a$ برای $A$ و یک پایه‌ی $b$ برای $B$ درنظر بگیرید، داریم
+\begin{align*}
+|b| = rank_M(B) > rank_M(A) = |a| , a , b \in \mathcal{I} \rightarrow \exists y \in b\backslash a \quad | \quad a + y \in \mathcal{I}
+\end{align*}
+دلیل وجود $y$ به دلیل اصول موضوعه‌ی ماتروید برای  $M$ است. توجه کنید که $y$ نمی‌تواند درون $A$ باشد، در غیر اینصورت پایه‌ی $a$ قابل گسترش به $a + y$ بود که با فرض پایه بودن $a$ در تناقض است. بنابراین  داریم:
+\begin{align*}
+	y \in B \backslash A \rightarrow rank(A + y) = rank(A) + 1
+\end{align*}
+ادعا می‌کنیم که مجموعه‌ی
+$X = A + y$
+گوگولی است. داریم:
+\begin{align*}
+	k - |X| = k - (|A| + 1) = k - |A| - 1 \geq m - (rank(A) + 1) \\ = m - rank(A + x) = m - rank(X)
+\end{align*}
+که معادل با گوگولی بودن $X = A + y$ است. پس 
+$y \in B \backslash A$
+را پیدا کردیم به طوری که
+$X = A + y \in \mathcal{I'}$.
+\item 
+\begin{align*}
+	rank_M(B) = rank_M(A)
+\end{align*}
+در این حالت یک
+$x \in B \backslash A$
+دلخواه درنظر می‌گیریم، داریم:
+\begin{align*}
+	&|A| < |B| \\
+	&\rightarrow k - |A + x| \geq k - |B| \geq m - rank(B) = m - rank(A) \geq m - rank(A + x)
+\end{align*}
+بنابراین 
+$A + x$
+نیز گوگولی است.
+\end{itemize}
+در هر دو حالت نشان دادیم یک $x \in B \backslash A$ پیدا می‌شود که $A + x$گوگولی باقی بماند، یا به طور معادل
+$A + x \in \mathcal{I'}$.
+پس مورد سوم نیز اثبات شد. 
+\end{enumerate}
+\paragraph{\color{blue}
+با اثبات شدن ۳ مورد بالا، اثبات می‌شود که $M_2$ یک ماتروید است و از آنجایی که پایه‌های $M_2$ به شکل گفته شده در صورت سوال هستند، حکم اثبات می‌شود.
+}
+\end{document}
